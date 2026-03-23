@@ -9,7 +9,7 @@ __turbopack_context__.s([
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 ;
-var _s = __turbopack_context__.k.signature(), _s1 = __turbopack_context__.k.signature(), _s2 = __turbopack_context__.k.signature(), _s3 = __turbopack_context__.k.signature();
+var _s = __turbopack_context__.k.signature(), _s1 = __turbopack_context__.k.signature(), _s2 = __turbopack_context__.k.signature(), _s3 = __turbopack_context__.k.signature(), _s4 = __turbopack_context__.k.signature();
 "use client";
 ;
 // ─── FONTS and the global styles that was used.. responsiveness also───────────────────────────────────────────────────
@@ -1575,7 +1575,58 @@ function SystemsSection() {
 }
 _s2(SystemsSection, "LYMHw6xE17pbh6ai9qaw76OM0Ms=");
 _c9 = SystemsSection;
+// Drop this into your page.jsx — replace the entire TelemetrySection function
 function TelemetrySection() {
+    _s3();
+    const [logIdx, setLogIdx] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(0);
+    const [pct, setPct] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(0);
+    const logs = [
+        "[SCAN]  Sweeping 433MHz band...",
+        "[RX]    Packet fragment detected...",
+        "[ERR]   Signal lost — retrying...",
+        "[SCAN]  Adjusting antenna gain...",
+        "[RX]    LoRa preamble detected...",
+        "[ERR]   CRC mismatch — discarding...",
+        "[SCAN]  Searching for CanSat beacon...",
+        "[ERR]   No telemetry stream detected"
+    ];
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "TelemetrySection.useEffect": ()=>{
+            const logTimer = setInterval({
+                "TelemetrySection.useEffect.logTimer": ()=>setLogIdx({
+                        "TelemetrySection.useEffect.logTimer": (i)=>(i + 1) % logs.length
+                    }["TelemetrySection.useEffect.logTimer"])
+            }["TelemetrySection.useEffect.logTimer"], 2000);
+            const pctTimer = setInterval({
+                "TelemetrySection.useEffect.pctTimer": ()=>setPct({
+                        "TelemetrySection.useEffect.pctTimer": (p)=>(p + Math.floor(Math.random() * 15)) % 100
+                    }["TelemetrySection.useEffect.pctTimer"])
+            }["TelemetrySection.useEffect.pctTimer"], 800);
+            return ({
+                "TelemetrySection.useEffect": ()=>{
+                    clearInterval(logTimer);
+                    clearInterval(pctTimer);
+                }
+            })["TelemetrySection.useEffect"];
+        }
+    }["TelemetrySection.useEffect"], []);
+    const barColors = [
+        "#27C47A",
+        "#FF6B6B",
+        "#1A6CFF",
+        "#FFB800",
+        "#9B59B6",
+        "#38BDF8"
+    ];
+    const barHeights = [
+        6,
+        10,
+        14,
+        18,
+        14,
+        10,
+        6
+    ];
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
         style: {
             minHeight: "88vh",
@@ -1583,52 +1634,272 @@ function TelemetrySection() {
             alignItems: "center",
             justifyContent: "center",
             padding: "80px clamp(14px,4vw,60px)",
-            position: "relative"
+            position: "relative",
+            overflow: "hidden"
         },
         children: [
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                style: {
-                    position: "absolute",
-                    top: "10%",
-                    right: "5%",
-                    width: 400,
-                    height: 400,
-                    borderRadius: "50%",
-                    background: "radial-gradient(circle,rgba(26,108,255,0.08) 0%,transparent 70%)",
-                    pointerEvents: "none"
-                }
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("style", {
+                children: `
+        @keyframes orbit1 { to { transform: rotate(360deg); } }
+        @keyframes orbit2 { to { transform: rotate(-360deg); } }
+        @keyframes barPulse {
+          0%,100% { background: #141D30; box-shadow: none; }
+          50% { background: #E8612A; box-shadow: 0 0 8px rgba(232,97,42,0.5); }
+        }
+        @keyframes progressAnim {
+          0%   { width: 0%;  opacity: 1; }
+          70%  { width: 85%; opacity: 1; }
+          90%  { width: 85%; opacity: 0.5; }
+          100% { width: 0%;  opacity: 0; }
+        }
+        @keyframes logFadeIn {
+          from { opacity:0; transform: translateY(5px); }
+          to   { opacity:1; transform: translateY(0); }
+        }
+        @keyframes gradientShift {
+          0%,100% { background-position: 0% 50%; }
+          50%     { background-position: 100% 50%; }
+        }
+        @keyframes floatSat {
+          0%,100% { transform: translateY(0px); }
+          50%     { transform: translateY(-8px); }
+        }
+        @keyframes scanline {
+          0%   { top: -10%; opacity: 0.6; }
+          100% { top: 110%; opacity: 0; }
+        }
+        .bar-pulse-1 { animation: barPulse 1.8s ease-in-out infinite 0s; }
+        .bar-pulse-2 { animation: barPulse 1.8s ease-in-out infinite 0.15s; }
+        .bar-pulse-3 { animation: barPulse 1.8s ease-in-out infinite 0.3s; }
+        .bar-pulse-4 { animation: barPulse 1.8s ease-in-out infinite 0.45s; }
+        .bar-pulse-5 { animation: barPulse 1.8s ease-in-out infinite 0.6s; }
+        .bar-pulse-6 { animation: barPulse 1.8s ease-in-out infinite 0.75s; }
+        .bar-pulse-7 { animation: barPulse 1.8s ease-in-out infinite 0.9s; }
+        .progress-fill-anim { animation: progressAnim 3s ease-in-out infinite; }
+        .log-fade { animation: logFadeIn 0.4s ease both; }
+        .sat-float { animation: floatSat 3s ease-in-out infinite; }
+        .tele-preview-wrap { filter: blur(1.5px); opacity: 0.3; pointer-events: none; }
+      `
             }, void 0, false, {
                 fileName: "[project]/app/page.jsx",
-                lineNumber: 382,
+                lineNumber: 408,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 style: {
                     position: "absolute",
-                    bottom: "10%",
-                    left: "5%",
-                    width: 250,
-                    height: 250,
-                    borderRadius: "50%",
-                    background: "radial-gradient(circle,rgba(232,97,42,0.06) 0%,transparent 70%)",
+                    inset: 0,
+                    backgroundImage: "linear-gradient(rgba(26,108,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(26,108,255,0.04) 1px, transparent 1px)",
+                    backgroundSize: "40px 40px",
                     pointerEvents: "none"
                 }
             }, void 0, false, {
                 fileName: "[project]/app/page.jsx",
-                lineNumber: 383,
+                lineNumber: 451,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 style: {
+                    position: "absolute",
+                    top: "-10%",
+                    right: "-5%",
+                    width: 500,
+                    height: 500,
+                    borderRadius: "50%",
+                    background: "radial-gradient(circle, rgba(26,108,255,0.09) 0%, transparent 70%)",
+                    pointerEvents: "none"
+                }
+            }, void 0, false, {
+                fileName: "[project]/app/page.jsx",
+                lineNumber: 454,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                style: {
+                    position: "absolute",
+                    bottom: "-5%",
+                    left: "-5%",
+                    width: 320,
+                    height: 320,
+                    borderRadius: "50%",
+                    background: "radial-gradient(circle, rgba(232,97,42,0.07) 0%, transparent 70%)",
+                    pointerEvents: "none"
+                }
+            }, void 0, false, {
+                fileName: "[project]/app/page.jsx",
+                lineNumber: 455,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                style: {
+                    position: "absolute",
+                    top: "40%",
+                    left: "10%",
+                    width: 200,
+                    height: 200,
+                    borderRadius: "50%",
+                    background: "radial-gradient(circle, rgba(39,196,122,0.05) 0%, transparent 70%)",
+                    pointerEvents: "none"
+                }
+            }, void 0, false, {
+                fileName: "[project]/app/page.jsx",
+                lineNumber: 456,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                style: {
+                    position: "absolute",
+                    left: 0,
+                    right: 0,
+                    height: "2px",
+                    background: "linear-gradient(90deg, transparent, rgba(232,97,42,0.4), transparent)",
+                    animation: "scanline 4s linear infinite",
+                    pointerEvents: "none",
+                    zIndex: 2
+                }
+            }, void 0, false, {
+                fileName: "[project]/app/page.jsx",
+                lineNumber: 459,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                style: {
+                    position: "relative",
+                    zIndex: 10,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
                     textAlign: "center",
-                    maxWidth: 520
+                    maxWidth: 560,
+                    width: "100%"
                 },
                 children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "sat-float",
+                        style: {
+                            position: "relative",
+                            width: 120,
+                            height: 120,
+                            marginBottom: 28,
+                            flexShrink: 0
+                        },
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                style: {
+                                    position: "absolute",
+                                    inset: 0,
+                                    borderRadius: "50%",
+                                    border: "1px solid rgba(232,97,42,0.25)",
+                                    animation: "orbit1 6s linear infinite"
+                                },
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    style: {
+                                        position: "absolute",
+                                        width: 8,
+                                        height: 8,
+                                        background: "#E8612A",
+                                        borderRadius: "50%",
+                                        top: -4,
+                                        left: "50%",
+                                        transform: "translateX(-50%)",
+                                        boxShadow: "0 0 10px #E8612A, 0 0 20px rgba(232,97,42,0.4)"
+                                    }
+                                }, void 0, false, {
+                                    fileName: "[project]/app/page.jsx",
+                                    lineNumber: 468,
+                                    columnNumber: 13
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "[project]/app/page.jsx",
+                                lineNumber: 467,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                style: {
+                                    position: "absolute",
+                                    inset: 14,
+                                    borderRadius: "50%",
+                                    border: "1px solid rgba(26,108,255,0.2)",
+                                    animation: "orbit2 4s linear infinite"
+                                },
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    style: {
+                                        position: "absolute",
+                                        width: 6,
+                                        height: 6,
+                                        background: "#1A6CFF",
+                                        borderRadius: "50%",
+                                        bottom: -3,
+                                        left: "50%",
+                                        transform: "translateX(-50%)",
+                                        boxShadow: "0 0 8px #1A6CFF, 0 0 16px rgba(26,108,255,0.4)"
+                                    }
+                                }, void 0, false, {
+                                    fileName: "[project]/app/page.jsx",
+                                    lineNumber: 472,
+                                    columnNumber: 13
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "[project]/app/page.jsx",
+                                lineNumber: 471,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                style: {
+                                    position: "absolute",
+                                    inset: 28,
+                                    background: "#070C18",
+                                    border: "1px solid #1A2540",
+                                    borderRadius: "50%",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    fontSize: 26
+                                },
+                                children: "🛰️"
+                            }, void 0, false, {
+                                fileName: "[project]/app/page.jsx",
+                                lineNumber: 475,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/app/page.jsx",
+                        lineNumber: 465,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        style: {
+                            display: "flex",
+                            alignItems: "flex-end",
+                            gap: 3,
+                            height: 20,
+                            marginBottom: 24
+                        },
+                        children: barHeights.map((h, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: `bar-pulse-${i + 1}`,
+                                style: {
+                                    width: 5,
+                                    height: h,
+                                    borderRadius: 2,
+                                    background: "#141D30",
+                                    transition: "background 0.3s"
+                                }
+                            }, i, false, {
+                                fileName: "[project]/app/page.jsx",
+                                lineNumber: 481,
+                                columnNumber: 13
+                            }, this))
+                    }, void 0, false, {
+                        fileName: "[project]/app/page.jsx",
+                        lineNumber: 479,
+                        columnNumber: 9
+                    }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         style: {
                             display: "inline-flex",
                             alignItems: "center",
-                            gap: 8,
+                            gap: 7,
                             padding: "5px 14px",
                             background: "rgba(232,97,42,0.1)",
                             border: "1px solid rgba(232,97,42,0.3)",
@@ -1637,7 +1908,7 @@ function TelemetrySection() {
                             fontSize: 10,
                             letterSpacing: 2,
                             color: "#E8612A",
-                            marginBottom: 20
+                            marginBottom: 18
                         },
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1650,31 +1921,33 @@ function TelemetrySection() {
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/app/page.jsx",
-                                lineNumber: 388,
+                                lineNumber: 487,
                                 columnNumber: 11
                             }, this),
                             "TELEMETRY LINK OFFLINE"
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/page.jsx",
-                        lineNumber: 387,
+                        lineNumber: 486,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         style: {
                             fontFamily: "'Space Mono',monospace",
-                            fontSize: "clamp(60px,10vw,90px)",
+                            fontSize: "clamp(64px,12vw,96px)",
                             fontWeight: 700,
-                            background: "linear-gradient(135deg,#E8612A,#FF7A42 40%,#FFB800)",
+                            background: "linear-gradient(135deg, #E8612A, #FF7A42 40%, #FFB800)",
                             WebkitBackgroundClip: "text",
                             WebkitTextFillColor: "transparent",
+                            backgroundClip: "text",
                             lineHeight: 1,
-                            marginBottom: 12
+                            marginBottom: 10,
+                            letterSpacing: -3
                         },
                         children: "404"
                     }, void 0, false, {
                         fileName: "[project]/app/page.jsx",
-                        lineNumber: 393,
+                        lineNumber: 492,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -1694,13 +1967,13 @@ function TelemetrySection() {
                                 children: "."
                             }, void 0, false, {
                                 fileName: "[project]/app/page.jsx",
-                                lineNumber: 395,
-                                columnNumber: 160
+                                lineNumber: 495,
+                                columnNumber: 27
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/page.jsx",
-                        lineNumber: 395,
+                        lineNumber: 494,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1709,10 +1982,12 @@ function TelemetrySection() {
                             fontSize: 15,
                             color: "#7A8FAD",
                             lineHeight: 1.8,
-                            marginBottom: 32
+                            marginBottom: 28,
+                            maxWidth: 420
                         },
                         children: [
-                            "The live telemetry dashboard is under construction. Ground station integration and LoRa data pipeline are being configured. Check back closer to launch — ",
+                            "The live telemetry dashboard is under construction. Ground station integration and LoRa data pipeline are being configured. Check back closer to launch —",
+                            " ",
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
                                 style: {
                                     color: "#F0F4FF"
@@ -1720,77 +1995,317 @@ function TelemetrySection() {
                                 children: "Apr 12, 2026"
                             }, void 0, false, {
                                 fileName: "[project]/app/page.jsx",
-                                lineNumber: 398,
-                                columnNumber: 165
+                                lineNumber: 500,
+                                columnNumber: 11
                             }, this),
                             "."
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/page.jsx",
-                        lineNumber: 397,
+                        lineNumber: 498,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "tele-preview-wrap",
+                        style: {
+                            display: "grid",
+                            gridTemplateColumns: "repeat(3,1fr)",
+                            gap: 10,
+                            width: "100%",
+                            marginBottom: 24,
+                            position: "relative"
+                        },
+                        children: [
+                            [
+                                {
+                                    label: "Altitude",
+                                    val: "— m",
+                                    color: "#27C47A",
+                                    w: "60%"
+                                },
+                                {
+                                    label: "Temperature",
+                                    val: "— °C",
+                                    color: "#FF6B6B",
+                                    w: "45%"
+                                },
+                                {
+                                    label: "Pressure",
+                                    val: "— hPa",
+                                    color: "#1A6CFF",
+                                    w: "75%"
+                                }
+                            ].map((card)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    style: {
+                                        background: "#070C18",
+                                        border: "1px solid #141D30",
+                                        borderRadius: 8,
+                                        padding: "12px 14px",
+                                        textAlign: "left"
+                                    },
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            style: {
+                                                fontFamily: "'Space Mono',monospace",
+                                                fontSize: 8,
+                                                color: "#7A8FAD",
+                                                letterSpacing: 1.5,
+                                                textTransform: "uppercase",
+                                                marginBottom: 5
+                                            },
+                                            children: card.label
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/page.jsx",
+                                            lineNumber: 511,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            style: {
+                                                fontFamily: "'Syne',sans-serif",
+                                                fontSize: 20,
+                                                fontWeight: 700,
+                                                color: card.color,
+                                                marginBottom: 8
+                                            },
+                                            children: card.val
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/page.jsx",
+                                            lineNumber: 512,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            style: {
+                                                height: 3,
+                                                background: "#141D30",
+                                                borderRadius: 2
+                                            },
+                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                style: {
+                                                    width: card.w,
+                                                    height: "100%",
+                                                    background: card.color,
+                                                    borderRadius: 2
+                                                }
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/page.jsx",
+                                                lineNumber: 514,
+                                                columnNumber: 17
+                                            }, this)
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/page.jsx",
+                                            lineNumber: 513,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, card.label, true, {
+                                    fileName: "[project]/app/page.jsx",
+                                    lineNumber: 510,
+                                    columnNumber: 13
+                                }, this)),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                style: {
+                                    position: "absolute",
+                                    inset: 0,
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    background: "rgba(4,6,15,0.5)",
+                                    borderRadius: 8
+                                },
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                    style: {
+                                        fontFamily: "'Space Mono',monospace",
+                                        fontSize: 11,
+                                        letterSpacing: 3,
+                                        color: "#E8612A"
+                                    },
+                                    children: "NO SIGNAL"
+                                }, void 0, false, {
+                                    fileName: "[project]/app/page.jsx",
+                                    lineNumber: 520,
+                                    columnNumber: 13
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "[project]/app/page.jsx",
+                                lineNumber: 519,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/app/page.jsx",
+                        lineNumber: 504,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         style: {
+                            width: "100%",
+                            maxWidth: 340,
+                            marginBottom: 20
+                        },
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                style: {
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    fontFamily: "'Space Mono',monospace",
+                                    fontSize: 10,
+                                    color: "#7A8FAD",
+                                    letterSpacing: 1,
+                                    marginBottom: 7
+                                },
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        children: "ESTABLISHING LINK"
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/page.jsx",
+                                        lineNumber: 527,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        children: [
+                                            pct,
+                                            "%"
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/app/page.jsx",
+                                        lineNumber: 528,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/app/page.jsx",
+                                lineNumber: 526,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                style: {
+                                    height: 3,
+                                    background: "#141D30",
+                                    borderRadius: 2,
+                                    overflow: "hidden"
+                                },
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "progress-fill-anim",
+                                    style: {
+                                        height: "100%",
+                                        background: "linear-gradient(90deg, #E8612A, #FFB800)",
+                                        borderRadius: 2
+                                    }
+                                }, void 0, false, {
+                                    fileName: "[project]/app/page.jsx",
+                                    lineNumber: 531,
+                                    columnNumber: 13
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "[project]/app/page.jsx",
+                                lineNumber: 530,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/app/page.jsx",
+                        lineNumber: 525,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        style: {
+                            width: "100%",
                             background: "#070C18",
                             border: "1px solid #141D30",
                             borderRadius: 8,
                             padding: "12px 16px",
                             fontFamily: "'Space Mono',monospace",
                             fontSize: 11,
-                            color: "#27C47A",
                             textAlign: "left",
                             marginBottom: 28
                         },
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 style: {
-                                    opacity: 0.3,
-                                    marginBottom: 4
+                                    color: "#27C47A",
+                                    opacity: 0.25,
+                                    marginBottom: 3
                                 },
                                 children: "[INIT]  LoRa SX1278 @ 433MHz — searching..."
                             }, void 0, false, {
                                 fileName: "[project]/app/page.jsx",
-                                lineNumber: 403,
+                                lineNumber: 537,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 style: {
-                                    opacity: 0.3,
-                                    marginBottom: 4
+                                    color: "#27C47A",
+                                    opacity: 0.25,
+                                    marginBottom: 3
                                 },
                                 children: "[RX]    Awaiting ground station connection..."
                             }, void 0, false, {
                                 fileName: "[project]/app/page.jsx",
-                                lineNumber: 404,
+                                lineNumber: 538,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                children: "[ERR]   No telemetry stream detected"
-                            }, void 0, false, {
+                                className: "log-fade",
+                                style: {
+                                    color: "#27C47A"
+                                },
+                                children: logs[logIdx]
+                            }, logIdx, false, {
                                 fileName: "[project]/app/page.jsx",
-                                lineNumber: 405,
+                                lineNumber: 539,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/page.jsx",
-                        lineNumber: 402,
+                        lineNumber: 536,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                        onClick: ()=>{},
+                        style: {
+                            display: "inline-flex",
+                            alignItems: "center",
+                            gap: 8,
+                            padding: "11px 24px",
+                            background: "transparent",
+                            border: "1px solid #1A2540",
+                            borderRadius: 6,
+                            color: "#7A8FAD",
+                            fontFamily: "'Space Mono',monospace",
+                            fontSize: 11,
+                            letterSpacing: 1,
+                            cursor: "pointer",
+                            transition: "border-color .2s, color .2s"
+                        },
+                        onMouseEnter: (e)=>{
+                            e.currentTarget.style.borderColor = "#E8612A";
+                            e.currentTarget.style.color = "#E8612A";
+                        },
+                        onMouseLeave: (e)=>{
+                            e.currentTarget.style.borderColor = "#1A2540";
+                            e.currentTarget.style.color = "#7A8FAD";
+                        },
+                        children: "← Back to Overview"
+                    }, void 0, false, {
+                        fileName: "[project]/app/page.jsx",
+                        lineNumber: 543,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/page.jsx",
-                lineNumber: 385,
+                lineNumber: 462,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/page.jsx",
-        lineNumber: 380,
+        lineNumber: 405,
         columnNumber: 5
     }, this);
 }
+_s3(TelemetrySection, "P4TdAT4te22rXMG6m8qzakFZ7jE=");
 _c10 = TelemetrySection;
 // ─── SECTION: TIMELINE( WILL BE UPDATED AS THE PROJECT PROGRESSES,  SYLVESTER WILL KEEP US UPDATED) ───────────────────────────────────────────────────────
 function TimelineSection() {
@@ -1920,7 +2435,7 @@ function TimelineSection() {
                             text: "Engineering Timeline"
                         }, void 0, false, {
                             fileName: "[project]/app/page.jsx",
-                            lineNumber: 430,
+                            lineNumber: 575,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -1940,13 +2455,13 @@ function TimelineSection() {
                                     children: "Launch"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.jsx",
-                                    lineNumber: 431,
+                                    lineNumber: 576,
                                     columnNumber: 165
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.jsx",
-                            lineNumber: 431,
+                            lineNumber: 576,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1960,13 +2475,13 @@ function TimelineSection() {
                             children: "A milestone-driven schedule from architecture freeze to flight day."
                         }, void 0, false, {
                             fileName: "[project]/app/page.jsx",
-                            lineNumber: 432,
+                            lineNumber: 577,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.jsx",
-                    lineNumber: 429,
+                    lineNumber: 574,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1986,7 +2501,7 @@ function TimelineSection() {
                             }
                         }, void 0, false, {
                             fileName: "[project]/app/page.jsx",
-                            lineNumber: 435,
+                            lineNumber: 580,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2024,12 +2539,12 @@ function TimelineSection() {
                                                 }
                                             }, void 0, false, {
                                                 fileName: "[project]/app/page.jsx",
-                                                lineNumber: 442,
+                                                lineNumber: 587,
                                                 columnNumber: 21
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.jsx",
-                                            lineNumber: 441,
+                                            lineNumber: 586,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2070,7 +2585,7 @@ function TimelineSection() {
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/app/page.jsx",
-                                                                    lineNumber: 450,
+                                                                    lineNumber: 595,
                                                                     columnNumber: 25
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2083,13 +2598,13 @@ function TimelineSection() {
                                                                     children: p.phase
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/app/page.jsx",
-                                                                    lineNumber: 451,
+                                                                    lineNumber: 596,
                                                                     columnNumber: 25
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/app/page.jsx",
-                                                            lineNumber: 449,
+                                                            lineNumber: 594,
                                                             columnNumber: 23
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Badge, {
@@ -2097,13 +2612,13 @@ function TimelineSection() {
                                                             children: sl[p.status]
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/page.jsx",
-                                                            lineNumber: 453,
+                                                            lineNumber: 598,
                                                             columnNumber: 23
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/page.jsx",
-                                                    lineNumber: 448,
+                                                    lineNumber: 593,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2133,12 +2648,12 @@ function TimelineSection() {
                                                                     children: t
                                                                 }, t, false, {
                                                                     fileName: "[project]/app/page.jsx",
-                                                                    lineNumber: 457,
+                                                                    lineNumber: 602,
                                                                     columnNumber: 43
                                                                 }, this))
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/page.jsx",
-                                                            lineNumber: 456,
+                                                            lineNumber: 601,
                                                             columnNumber: 23
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2158,7 +2673,7 @@ function TimelineSection() {
                                                                     children: "Deliverables"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/app/page.jsx",
-                                                                    lineNumber: 460,
+                                                                    lineNumber: 605,
                                                                     columnNumber: 25
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2171,54 +2686,54 @@ function TimelineSection() {
                                                                     children: p.del
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/app/page.jsx",
-                                                                    lineNumber: 461,
+                                                                    lineNumber: 606,
                                                                     columnNumber: 25
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/app/page.jsx",
-                                                            lineNumber: 459,
+                                                            lineNumber: 604,
                                                             columnNumber: 23
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/page.jsx",
-                                                    lineNumber: 455,
+                                                    lineNumber: 600,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.jsx",
-                                            lineNumber: 444,
+                                            lineNumber: 589,
                                             columnNumber: 19
                                         }, this)
                                     ]
                                 }, p.week, true, {
                                     fileName: "[project]/app/page.jsx",
-                                    lineNumber: 440,
+                                    lineNumber: 585,
                                     columnNumber: 17
                                 }, this);
                             })
                         }, void 0, false, {
                             fileName: "[project]/app/page.jsx",
-                            lineNumber: 436,
+                            lineNumber: 581,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.jsx",
-                    lineNumber: 434,
+                    lineNumber: 579,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/page.jsx",
-            lineNumber: 428,
+            lineNumber: 573,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/page.jsx",
-        lineNumber: 427,
+        lineNumber: 572,
         columnNumber: 5
     }, this);
 }
@@ -2317,7 +2832,7 @@ function TeamSection() {
                             text: "Project Team"
                         }, void 0, false, {
                             fileName: "[project]/app/page.jsx",
-                            lineNumber: 489,
+                            lineNumber: 634,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -2337,13 +2852,13 @@ function TeamSection() {
                                     children: "the Mission"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.jsx",
-                                    lineNumber: 490,
+                                    lineNumber: 635,
                                     columnNumber: 166
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.jsx",
-                            lineNumber: 490,
+                            lineNumber: 635,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2357,13 +2872,13 @@ function TeamSection() {
                             children: "Three functional teams under unified project leadership."
                         }, void 0, false, {
                             fileName: "[project]/app/page.jsx",
-                            lineNumber: 491,
+                            lineNumber: 636,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.jsx",
-                    lineNumber: 488,
+                    lineNumber: 633,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2402,7 +2917,7 @@ function TeamSection() {
                                             }
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.jsx",
-                                            lineNumber: 497,
+                                            lineNumber: 642,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2415,13 +2930,13 @@ function TeamSection() {
                                             children: team.name
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.jsx",
-                                            lineNumber: 498,
+                                            lineNumber: 643,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.jsx",
-                                    lineNumber: 496,
+                                    lineNumber: 641,
                                     columnNumber: 15
                                 }, this),
                                 team.members.map((m)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2457,7 +2972,7 @@ function TeamSection() {
                                                         children: m.name.charAt(0)
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/page.jsx",
-                                                        lineNumber: 503,
+                                                        lineNumber: 648,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2472,7 +2987,7 @@ function TeamSection() {
                                                                 children: m.name
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/page.jsx",
-                                                                lineNumber: 505,
+                                                                lineNumber: 650,
                                                                 columnNumber: 23
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2486,19 +3001,19 @@ function TeamSection() {
                                                                 children: m.role
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/page.jsx",
-                                                                lineNumber: 506,
+                                                                lineNumber: 651,
                                                                 columnNumber: 23
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/page.jsx",
-                                                        lineNumber: 504,
+                                                        lineNumber: 649,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/page.jsx",
-                                                lineNumber: 502,
+                                                lineNumber: 647,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2512,24 +3027,24 @@ function TeamSection() {
                                                 children: m.bio
                                             }, void 0, false, {
                                                 fileName: "[project]/app/page.jsx",
-                                                lineNumber: 509,
+                                                lineNumber: 654,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, m.name, true, {
                                         fileName: "[project]/app/page.jsx",
-                                        lineNumber: 501,
+                                        lineNumber: 646,
                                         columnNumber: 17
                                     }, this))
                             ]
                         }, team.name, true, {
                             fileName: "[project]/app/page.jsx",
-                            lineNumber: 495,
+                            lineNumber: 640,
                             columnNumber: 13
                         }, this))
                 }, void 0, false, {
                     fileName: "[project]/app/page.jsx",
-                    lineNumber: 493,
+                    lineNumber: 638,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2552,7 +3067,7 @@ function TeamSection() {
                             children: "Want to support Project CanSat?"
                         }, void 0, false, {
                             fileName: "[project]/app/page.jsx",
-                            lineNumber: 517,
+                            lineNumber: 662,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2566,7 +3081,7 @@ function TeamSection() {
                             children: "Sponsorships, donations, and institutional partnerships are open. Help us put Nigeria's first student CanSat in the sky."
                         }, void 0, false, {
                             fileName: "[project]/app/page.jsx",
-                            lineNumber: 518,
+                            lineNumber: 663,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2593,7 +3108,7 @@ function TeamSection() {
                                     children: "Donate to the Mission"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.jsx",
-                                    lineNumber: 520,
+                                    lineNumber: 665,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -2612,36 +3127,36 @@ function TeamSection() {
                                     children: "Join the Club"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.jsx",
-                                    lineNumber: 521,
+                                    lineNumber: 666,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.jsx",
-                            lineNumber: 519,
+                            lineNumber: 664,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.jsx",
-                    lineNumber: 516,
+                    lineNumber: 661,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/page.jsx",
-            lineNumber: 487,
+            lineNumber: 632,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/page.jsx",
-        lineNumber: 486,
+        lineNumber: 631,
         columnNumber: 5
     }, this);
 }
 _c12 = TeamSection;
 function CanSatPage() {
-    _s3();
+    _s4();
     const [activeTab, setActiveTab] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("Overview");
     const sections = {
         Overview: OverviewSection,
@@ -2656,7 +3171,7 @@ function CanSatPage() {
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(GlobalStyles, {}, void 0, false, {
                 fileName: "[project]/app/page.jsx",
-                lineNumber: 543,
+                lineNumber: 688,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2668,7 +3183,7 @@ function CanSatPage() {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(StarField, {}, void 0, false, {
                         fileName: "[project]/app/page.jsx",
-                        lineNumber: 545,
+                        lineNumber: 690,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2682,19 +3197,19 @@ function CanSatPage() {
                                 setActive: setActiveTab
                             }, void 0, false, {
                                 fileName: "[project]/app/page.jsx",
-                                lineNumber: 547,
+                                lineNumber: 692,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
                                 className: "cansat-fade",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(ActiveSection, {}, void 0, false, {
                                     fileName: "[project]/app/page.jsx",
-                                    lineNumber: 549,
+                                    lineNumber: 694,
                                     columnNumber: 13
                                 }, this)
                             }, activeTab, false, {
                                 fileName: "[project]/app/page.jsx",
-                                lineNumber: 548,
+                                lineNumber: 693,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("footer", {
@@ -2724,7 +3239,7 @@ function CanSatPage() {
                                                 }
                                             }, void 0, false, {
                                                 fileName: "[project]/app/page.jsx",
-                                                lineNumber: 553,
+                                                lineNumber: 698,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2736,13 +3251,13 @@ function CanSatPage() {
                                                 children: "PROJECT CANSAT — SPACE CLUBS LASU"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/page.jsx",
-                                                lineNumber: 554,
+                                                lineNumber: 699,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/page.jsx",
-                                        lineNumber: 552,
+                                        lineNumber: 697,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2754,7 +3269,7 @@ function CanSatPage() {
                                         children: "Target Launch: April 12, 2026"
                                     }, void 0, false, {
                                         fileName: "[project]/app/page.jsx",
-                                        lineNumber: 556,
+                                        lineNumber: 701,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -2768,31 +3283,31 @@ function CanSatPage() {
                                         children: "← spaceclubslasu.org"
                                     }, void 0, false, {
                                         fileName: "[project]/app/page.jsx",
-                                        lineNumber: 557,
+                                        lineNumber: 702,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/page.jsx",
-                                lineNumber: 551,
+                                lineNumber: 696,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/page.jsx",
-                        lineNumber: 546,
+                        lineNumber: 691,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/page.jsx",
-                lineNumber: 544,
+                lineNumber: 689,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true);
 }
-_s3(CanSatPage, "9EoP8PCAmx6CHXkJWodmvzHxtkQ=");
+_s4(CanSatPage, "9EoP8PCAmx6CHXkJWodmvzHxtkQ=");
 _c13 = CanSatPage;
 var _c, _c1, _c2, _c3, _c4, _c5, _c6, _c7, _c8, _c9, _c10, _c11, _c12, _c13;
 __turbopack_context__.k.register(_c, "GlobalStyles");
