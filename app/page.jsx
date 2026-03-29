@@ -375,7 +375,7 @@ function SystemsSection() {
   );
 }
 
-// Drop this into your page.jsx — replace the entire TelemetrySection function
+
 
 function TelemetrySection() {
   const [logIdx, setLogIdx] = useState(0);
@@ -620,13 +620,56 @@ function TimelineSection() {
 // ─── SECTION: TEAM ( TEAM SECTION NOT COMPLETED DUE TO LACK OF INFO FROM OTHER DEPARTMENTS)───────────────────────────────────────────────────────────
 function TeamSection() {
   const teams = [
-    { name: "Software Team", color: C.accent, members: [{ name: "MURAINA ABISOYE", role: "Backend And Visualization", bio: "Backend architecture, live telemetry data pipeline, real-time visualization and ground station software development" }
-     ,{ name: "RAJI ABDULLAH OPEYEMI", role: "Frontend AND GRAPHICS", bio: "Frontend architecture, UI/UX design, mission dashboard, live telemetry display and graphics development"  }, 
-      { name: "CHIBUEKE VICTORY", role: "Frontend", bio: "Mission dashboard, live telemetry display" }] },
-    { name: "Avionics Team", color: C.blue, members: [{ name: "Avionics Engineer", role: "Electrical Architecture", bio: "PCB design, firmware implementation, power validation and telemetry testing." }, { name: "Firmware Developer", role: "Software & Control", bio: "MicroPython firmware, sensor polling, data pipeline and LoRa telemetry logic." }] },
-    { name: "Mechanical & Structures", color: C.green, members: [{ name: "CAD Engineer", role: "Structural Design", bio: "CAD modeling, structural validation, impact tolerance and recovery system housing." }, { name: "Integration Lead", role: "Assembly & Recovery", bio: "Parachute mechanism, internal mounting architecture, balance optimisation." }] },
-    { name: "Documentation & Web", color: C.purple, members: [{ name: "Systems Engineer", role: "Requirements & Risk", bio: "Requirements tracking, risk register, review documentation SRR through FRR." }, { name: "Frontend Team", role: "Web & Visualisation", bio: "Mission dashboard, live telemetry display, map tracking and data visualisation." }] },
-  ];
+  {
+    name: "Project Leadership", color: C.accent,
+    members: [
+      { name: "Sylvester Agose", role: "Project Lead", bio: "Overall technical authority, integration oversight, milestone approval and external coordination." },
+      { name: "Yusuf Atolagbe", role: "Co-Lead", bio: "Subsystem alignment, schedule adherence and review preparation." },
+    ]
+  },
+  {
+    name: "Software / Visualisation", color: C.blue,
+    members: [
+      { name: "MURAINA DAVID", role: "Backend & Visualization", bio: "Backend architecture, live telemetry data pipeline, real-time visualization and ground station software development." },
+      { name: "RAJI ABDULLAH OPEYEMI", role: "Frontend & Graphics", bio: "Frontend architecture, UI/UX design, mission dashboard, live telemetry display and graphics development." },
+      { name: "CHIBUEZE VICTORY", role: "Frontend", bio: "Mission dashboard, live telemetry display." },
+    ]
+  },
+  {
+    name: "Design / CAD", color: C.purple,
+    members: [
+      { name: "Praise Omgbrumaye", role: "Team Lead" },
+      { name: "Adekoya Eniola", role: "Member" },
+      { name: "Kehinde Fodunrin", role: "Member" },
+      { name: "Elisha Bello", role: "Member" },
+    ]
+  },
+  {
+    name: "Hardware / IoT", color: C.green,
+    members: [
+      { name: "Yusuf Atolagbe", role: "Team Lead" },
+      { name: "Favour Obama", role: "Member" },
+    ]
+  },
+  {
+    name: "Research & Documentation", color: C.yellow,
+    members: [
+      { name: "Judith Oluchi", role: "Team Lead" },
+      { name: "Odoziaku Stephen", role: "Member" },
+      { name: "Abdurrauf Salahudeen", role: "Member" },
+      { name: "Azeezat Ogunjobi", role: "Member" },
+    ]
+  },
+  {
+    name: "Project & Event Management", color: C.cyan,
+    members: [
+      { name: "Fasasi Sulaimon", role: "Team Lead" },
+      { name: "Ojo Nihinlolawa", role: "Member" },
+      { name: "Igbokwe Chisom", role: "Member" },
+      { name: "Oregbesan Godsfavour", role: "Member" },
+    ]
+  },
+];
   return (
     <section style={{ padding: "90px clamp(14px,4vw,60px)", background: `linear-gradient(180deg,transparent,${C.bgCardAlt}33,transparent)` }}>
       <div style={{ maxWidth: 1280, margin: "0 auto" }}>
@@ -642,7 +685,7 @@ function TeamSection() {
                 <div style={{ width: 8, height: 8, borderRadius: "50%", background: team.color, boxShadow: `0 0 8px ${team.color}` }} />
                 <span style={{ fontFamily: "'Syne',sans-serif", fontSize: 13, fontWeight: 700, color: team.color }}>{team.name}</span>
               </div>
-             {team.members.map(m => (
+{team.members.map(m => (
   <div key={m.name} style={{ padding: "15px 17px", borderBottom: `1px solid ${C.border}` }}>
     <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: m.bio ? 7 : 0 }}>
       <div style={{ width: 32, height: 32, borderRadius: "50%", background: team.color + "18", border: `1px solid ${team.color}44`, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Syne',sans-serif", fontSize: 13, fontWeight: 700, color: team.color, flexShrink: 0 }}>
