@@ -1,87 +1,25 @@
-[00:00:04.666] Server  LOG     ✓ Ready in 3.3s
-[00:00:10.854] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:15:43.579] Server  LOG     ✓ Compiled in 954ms
-[00:15:44.264] Browser ERROR   uncaughtError: ReferenceError: TelemetrySection is not defined
-[00:16:04.063] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:16:04.069] Server  LOG     ✓ Compiled in 91ms
-[00:16:04.835] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:18:15.441] Server  LOG     ✓ Compiled in 82ms
-[00:24:40.023] Server  LOG     ✓ Compiled in 365ms
-[00:24:41.364] Browser ERROR   ./app/page.jsx:660:1
-Ecmascript file had an error
-  658 |
-  659 | // ─── ROOT ─────────────────────────────────────────────────────────────────────
-> 660 | export default function CanSatPage() {
-      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 661 |   const [activeTab, setActiveTab] = useState("Overview");
-      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 662 |   const sections = {
-      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 663 |     Overview: OverviewSection,
-      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 664 |     Mission: MissionSection,
-      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 665 |     Systems: SystemsSection,
-      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 666 |     Telemetry: TelemetrySection,
-      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 667 |     Timeline: TimelineSection,
-      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 668 |     Team: TeamSection,
-      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 669 |   };
-      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 670 |   const ActiveSection = sections[activeTab] || OverviewSection;
-      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 671 |   return (
-      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 672 |     <>
-      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 673 |       <GlobalStyles />
-      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 674 |       <div style={{ minHeight: "100vh", background: C.bg, position: "relative" }}>
-      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 675 |         <StarField />
-      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 676 |         <div style={{ position: "relative", zIndex: 1 }}>
-      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 677 |           <CanSatNav active={activeTab} setActive={setActiveTab} />
-      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 678 |           <main key={activeTab} className="cansat-fade">
-      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 679 |             <ActiveSection />
-      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 680 |           </main>
-      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 681 |           <footer style={{ borderTop: `1px solid ${C.border}`, padding: "22px clamp(14px,4vw,60px)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 10 }}>
-      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 682 |             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 683 |               <div style={{ width: 6, height: 6, borderRadius: "50%", background: C.accent }} />
-      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 684 |               <span style={{ fontFamily: "'Space Mono',monospace", fontSize: 10, color: C.muted }}>PROJECT CANSAT — SPACE CLUBS LASU</span>
-      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 685 |             </div>
-      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 686 |             <span style={{ fontFamily: "'Space Mono',monospace", fontSize: 9, color: C.muted }}>Target Launch: April 12, 2026</span>
-      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 687 |             <a href="https://www.spaceclubslasu.org" style={{ fontFamily: "'Space Mono',monospace", fontSize: 9, color: C.muted, textDecoration: "none" }}>← spaceclubslasu.org</a>
-      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 688 |           </footer>
-      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 689 |         </div>
-      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 690 |       </div>
-      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 691 |     </>
-      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 692 |   );
-      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 693 | }
-      | ^^
-  694 |
+<<<<<<< HEAD
+[00:00:06.277] Server  LOG     ✓ Ready in 4.6s
+[00:00:10.040] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:02:02.343] Server  LOG     ✓ Compiled in 201ms
+[00:03:08.017] Server  LOG     ✓ Compiled in 195ms
+[00:03:20.979] Server  LOG     ✓ Compiled in 242ms
+=======
+[00:23:31.490] Server  LOG     ✓ Compiled in 88ms
+[00:23:32.712] Server  LOG     ✓ Compiled in 103ms
+>>>>>>> 277f3353077d092f030c33d6d8b830cc942bf0e5
+[00:05:15.582] Server  LOG     ✓ Compiled in 612ms
+[00:05:16.979] Server  ERROR   ⨯ ./app/page.jsx:622:1
+Parsing ecmascript source code failed
+  620 | // ─── SECTION: TEAM ( TEAM SECTION NOT COMPLETED DUE TO LACK OF INFO FROM OTHER DEPARTMENTS)───────────────────────────────────────────────────────────
+  621 | function TeamSection() {
+> 622 | <<<<<<< HEAD
+      | ^^^^^^^
+  623 |  const teams = [
+  624 |   {
+  625 |     name: "Project Leadership", color: C.accent,
 
-the name `default` is exported multiple times
+Merge conflict marker encountered.
 
 Import traces:
   Client Component Browser:
@@ -91,37 +29,20 @@ Import traces:
   Client Component SSR:
     ./app/page.jsx [Client Component SSR]
     ./app/page.jsx [Server Component]
-[00:24:41.365] Browser ERROR   ./app/page.jsx:378:10
-Ecmascript file had an error
-  376 | }
-  377 |
-> 378 | import { useEffect, useState } from "react";
-      |          ^^^^^^^^^
-  379 |
-  380 | export default function Telemetry404() {
-  381 |   const [pct, setPct] = useState(0);
 
-the name `useEffect` is defined multiple times
 
-Import traces:
-  Client Component Browser:
-    ./app/page.jsx [Client Component Browser]
-    ./app/page.jsx [Server Component]
 
-  Client Component SSR:
-    ./app/page.jsx [Client Component SSR]
-    ./app/page.jsx [Server Component]
-[00:24:41.365] Browser ERROR   ./app/page.jsx:378:21
-Ecmascript file had an error
-  376 | }
-  377 |
-> 378 | import { useEffect, useState } from "react";
-      |                     ^^^^^^^^
-  379 |
-  380 | export default function Telemetry404() {
-  381 |   const [pct, setPct] = useState(0);
+./app/page.jsx:674:1
+Parsing ecmascript source code failed
+  672 |   },
+  673 | ];
+> 674 | =======
+      | ^^^^^^^
+  675 |   const teams = [
+  676 |     { name: "Software Team", color: C.accent, members: [{ name: "MURAINA ABISOYE", role: "Backend And Visualization", bio: "Backend architecture, live telemetry data pipeline, real-time visualization and ground station software development" }
+  677 |      ,{ name: "RAJI ABDULLAH OPEYEMI", role: "Frontend AND GRAPHICS", bio: "Frontend architecture, UI/UX design, mission dashboard, live telemetry display and graphics development"  }, 
 
-the name `useState` is defined multiple times
+Merge conflict marker encountered.
 
 Import traces:
   Client Component Browser:
@@ -131,7 +52,329 @@ Import traces:
   Client Component SSR:
     ./app/page.jsx [Client Component SSR]
     ./app/page.jsx [Server Component]
-[00:25:00.079] Server  LOG     ✓ Compiled in 1257ms
-[00:26:38.087] Server  LOG     ✓ Compiled in 77ms
-[00:38:14.392] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[07:37:34.756] Server  LOG     ✓ Compiled in 189ms
+
+
+
+./app/page.jsx:683:1
+Parsing ecmascript source code failed
+  681 |     { name: "Documentation & Web", color: C.purple, members: [{ name: "Systems Engineer", role: "Requirements & Risk", bio: "Requirements tracking, risk register, review documentation SRR through FRR." }, { name: "Frontend Team", role: "Web & Visualisation", bio: "Mission dashboard, live telemetry display, map tracking and data visualisation." }] },
+  682 |   ];
+> 683 | >>>>>>> 277f3353077d092f030c33d6d8b830cc942bf0e5
+      | ^^^^^^^
+  684 |   return (
+  685 |     <section style={{ padding: "90px clamp(14px,4vw,60px)", background: `linear-gradient(180deg,transparent,${C.bgCardAlt}33,transparent)` }}>
+  686 |       <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/page.jsx [Client Component Browser]
+    ./app/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.jsx [Client Component SSR]
+    ./app/page.jsx [Server Component]
+
+
+[00:05:18.161] Browser ERROR   ./app/page.jsx:683:1
+Parsing ecmascript source code failed
+  681 |     { name: "Documentation & Web", color: C.purple, members: [{ name: "Systems Engineer", role: "Requirements & Risk", bio: "Requirements tracking, risk register, review documentation SRR through FRR." }, { name: "Frontend Team", role: "Web & Visualisation", bio: "Mission dashboard, live telemetry display, map tracking and data visualisation." }] },
+  682 |   ];
+> 683 | >>>>>>> 277f3353077d092f030c33d6d8b830cc942bf0e5
+      | ^^^^^^^
+  684 |   return (
+  685 |     <section style={{ padding: "90px clamp(14px,4vw,60px)", background: `linear-gradient(180deg,transparent,${C.bgCardAlt}33,transparent)` }}>
+  686 |       <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/page.jsx [Client Component Browser]
+    ./app/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.jsx [Client Component SSR]
+    ./app/page.jsx [Server Component]
+[00:05:18.161] Browser ERROR   ./app/page.jsx:683:1
+Parsing ecmascript source code failed
+  681 |     { name: "Documentation & Web", color: C.purple, members: [{ name: "Systems Engineer", role: "Requirements & Risk", bio: "Requirements tracking, risk register, review documentation SRR through FRR." }, { name: "Frontend Team", role: "Web & Visualisation", bio: "Mission dashboard, live telemetry display, map tracking and data visualisation." }] },
+  682 |   ];
+> 683 | >>>>>>> 277f3353077d092f030c33d6d8b830cc942bf0e5
+      | ^^^^^^^
+  684 |   return (
+  685 |     <section style={{ padding: "90px clamp(14px,4vw,60px)", background: `linear-gradient(180deg,transparent,${C.bgCardAlt}33,transparent)` }}>
+  686 |       <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/page.jsx [Client Component Browser]
+    ./app/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.jsx [Client Component SSR]
+    ./app/page.jsx [Server Component]
+[00:05:20.103] Server  LOG     ○ Compiling /_error ...
+[00:05:20.168] Browser ERROR   ./app/page.jsx:683:1
+Parsing ecmascript source code failed
+  681 |     { name: "Documentation & Web", color: C.purple, members: [{ name: "Systems Engineer", role: "Requirements & Risk", bio: "Requirements tracking, risk register, review documentation SRR through FRR." }, { name: "Frontend Team", role: "Web & Visualisation", bio: "Mission dashboard, live telemetry display, map tracking and data visualisation." }] },
+  682 |   ];
+> 683 | >>>>>>> 277f3353077d092f030c33d6d8b830cc942bf0e5
+      | ^^^^^^^
+  684 |   return (
+  685 |     <section style={{ padding: "90px clamp(14px,4vw,60px)", background: `linear-gradient(180deg,transparent,${C.bgCardAlt}33,transparent)` }}>
+  686 |       <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/page.jsx [Client Component Browser]
+    ./app/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.jsx [Client Component SSR]
+    ./app/page.jsx [Server Component]
+[00:05:20.168] Browser ERROR   ./app/page.jsx:683:1
+Parsing ecmascript source code failed
+  681 |     { name: "Documentation & Web", color: C.purple, members: [{ name: "Systems Engineer", role: "Requirements & Risk", bio: "Requirements tracking, risk register, review documentation SRR through FRR." }, { name: "Frontend Team", role: "Web & Visualisation", bio: "Mission dashboard, live telemetry display, map tracking and data visualisation." }] },
+  682 |   ];
+> 683 | >>>>>>> 277f3353077d092f030c33d6d8b830cc942bf0e5
+      | ^^^^^^^
+  684 |   return (
+  685 |     <section style={{ padding: "90px clamp(14px,4vw,60px)", background: `linear-gradient(180deg,transparent,${C.bgCardAlt}33,transparent)` }}>
+  686 |       <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/page.jsx [Client Component Browser]
+    ./app/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.jsx [Client Component SSR]
+    ./app/page.jsx [Server Component]
+[00:05:22.217] Server  ERROR   ⨯ ./app/page.jsx:622:1
+Parsing ecmascript source code failed
+  620 | // ─── SECTION: TEAM ( TEAM SECTION NOT COMPLETED DUE TO LACK OF INFO FROM OTHER DEPARTMENTS)───────────────────────────────────────────────────────────
+  621 | function TeamSection() {
+> 622 | <<<<<<< HEAD
+      | ^^^^^^^
+  623 |  const teams = [
+  624 |   {
+  625 |     name: "Project Leadership", color: C.accent,
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/page.jsx [Client Component Browser]
+    ./app/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.jsx [Client Component SSR]
+    ./app/page.jsx [Server Component]
+
+
+
+./app/page.jsx:674:1
+Parsing ecmascript source code failed
+  672 |   },
+  673 | ];
+> 674 | =======
+      | ^^^^^^^
+  675 |   const teams = [
+  676 |     { name: "Software Team", color: C.accent, members: [{ name: "MURAINA ABISOYE", role: "Backend And Visualization", bio: "Backend architecture, live telemetry data pipeline, real-time visualization and ground station software development" }
+  677 |      ,{ name: "RAJI ABDULLAH OPEYEMI", role: "Frontend AND GRAPHICS", bio: "Frontend architecture, UI/UX design, mission dashboard, live telemetry display and graphics development"  }, 
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/page.jsx [Client Component Browser]
+    ./app/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.jsx [Client Component SSR]
+    ./app/page.jsx [Server Component]
+
+
+
+./app/page.jsx:683:1
+Parsing ecmascript source code failed
+  681 |     { name: "Documentation & Web", color: C.purple, members: [{ name: "Systems Engineer", role: "Requirements & Risk", bio: "Requirements tracking, risk register, review documentation SRR through FRR." }, { name: "Frontend Team", role: "Web & Visualisation", bio: "Mission dashboard, live telemetry display, map tracking and data visualisation." }] },
+  682 |   ];
+> 683 | >>>>>>> 277f3353077d092f030c33d6d8b830cc942bf0e5
+      | ^^^^^^^
+  684 |   return (
+  685 |     <section style={{ padding: "90px clamp(14px,4vw,60px)", background: `linear-gradient(180deg,transparent,${C.bgCardAlt}33,transparent)` }}>
+  686 |       <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/page.jsx [Client Component Browser]
+    ./app/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.jsx [Client Component SSR]
+    ./app/page.jsx [Server Component]
+
+
+[00:05:22.427] Server  ERROR   ⨯ ./app/page.jsx:622:1
+Parsing ecmascript source code failed
+  620 | // ─── SECTION: TEAM ( TEAM SECTION NOT COMPLETED DUE TO LACK OF INFO FROM OTHER DEPARTMENTS)───────────────────────────────────────────────────────────
+  621 | function TeamSection() {
+> 622 | <<<<<<< HEAD
+      | ^^^^^^^
+  623 |  const teams = [
+  624 |   {
+  625 |     name: "Project Leadership", color: C.accent,
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/page.jsx [Client Component Browser]
+    ./app/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.jsx [Client Component SSR]
+    ./app/page.jsx [Server Component]
+
+
+
+./app/page.jsx:674:1
+Parsing ecmascript source code failed
+  672 |   },
+  673 | ];
+> 674 | =======
+      | ^^^^^^^
+  675 |   const teams = [
+  676 |     { name: "Software Team", color: C.accent, members: [{ name: "MURAINA ABISOYE", role: "Backend And Visualization", bio: "Backend architecture, live telemetry data pipeline, real-time visualization and ground station software development" }
+  677 |      ,{ name: "RAJI ABDULLAH OPEYEMI", role: "Frontend AND GRAPHICS", bio: "Frontend architecture, UI/UX design, mission dashboard, live telemetry display and graphics development"  }, 
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/page.jsx [Client Component Browser]
+    ./app/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.jsx [Client Component SSR]
+    ./app/page.jsx [Server Component]
+
+
+
+./app/page.jsx:683:1
+Parsing ecmascript source code failed
+  681 |     { name: "Documentation & Web", color: C.purple, members: [{ name: "Systems Engineer", role: "Requirements & Risk", bio: "Requirements tracking, risk register, review documentation SRR through FRR." }, { name: "Frontend Team", role: "Web & Visualisation", bio: "Mission dashboard, live telemetry display, map tracking and data visualisation." }] },
+  682 |   ];
+> 683 | >>>>>>> 277f3353077d092f030c33d6d8b830cc942bf0e5
+      | ^^^^^^^
+  684 |   return (
+  685 |     <section style={{ padding: "90px clamp(14px,4vw,60px)", background: `linear-gradient(180deg,transparent,${C.bgCardAlt}33,transparent)` }}>
+  686 |       <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/page.jsx [Client Component Browser]
+    ./app/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.jsx [Client Component SSR]
+    ./app/page.jsx [Server Component]
+
+
+[00:05:22.567] Browser ERROR   ./app/page.jsx:683:1
+Parsing ecmascript source code failed
+  681 |     { name: "Documentation & Web", color: C.purple, members: [{ name: "Systems Engineer", role: "Requirements & Risk", bio: "Requirements tracking, risk register, review documentation SRR through FRR." }, { name: "Frontend Team", role: "Web & Visualisation", bio: "Mission dashboard, live telemetry display, map tracking and data visualisation." }] },
+  682 |   ];
+> 683 | >>>>>>> 277f3353077d092f030c33d6d8b830cc942bf0e5
+      | ^^^^^^^
+  684 |   return (
+  685 |     <section style={{ padding: "90px clamp(14px,4vw,60px)", background: `linear-gradient(180deg,transparent,${C.bgCardAlt}33,transparent)` }}>
+  686 |       <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/page.jsx [Client Component Browser]
+    ./app/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.jsx [Client Component SSR]
+    ./app/page.jsx [Server Component]
+[00:05:23.286] Browser ERROR   uncaughtError: Error: ./app/page.jsx:683:1
+Parsing ecmascript source code failed
+  681 |     { name: "Documentation & Web", color: C.purple, members: [{ name: "Systems Engineer", role: "Requirements & Risk", bio: "Requirements tracking, risk register, review documentation SRR through FRR." }, { name: "Frontend Team", role: "Web & Visualisation", bio: "Mission dashboard, live telemetry display, map tracking and data visualisation." }] },
+  682 |   ];
+> 683 | >>>>>>> 277f3353077d092f030c33d6d8b830cc942bf0e5
+      | ^^^^^^^
+  684 |   return (
+  685 |     <section style={{ padding: "90px clamp(14px,4vw,60px)", background: `linear-gradient(180deg,transparent,${C.bgCardAlt}33,transparent)` }}>
+  686 |       <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/page.jsx [Client Component Browser]
+    ./app/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.jsx [Client Component SSR]
+    ./app/page.jsx [Server Component]
+
+
+[00:05:24.131] Browser ERROR   ./app/page.jsx:683:1
+Parsing ecmascript source code failed
+  681 |     { name: "Documentation & Web", color: C.purple, members: [{ name: "Systems Engineer", role: "Requirements & Risk", bio: "Requirements tracking, risk register, review documentation SRR through FRR." }, { name: "Frontend Team", role: "Web & Visualisation", bio: "Mission dashboard, live telemetry display, map tracking and data visualisation." }] },
+  682 |   ];
+> 683 | >>>>>>> 277f3353077d092f030c33d6d8b830cc942bf0e5
+      | ^^^^^^^
+  684 |   return (
+  685 |     <section style={{ padding: "90px clamp(14px,4vw,60px)", background: `linear-gradient(180deg,transparent,${C.bgCardAlt}33,transparent)` }}>
+  686 |       <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/page.jsx [Client Component Browser]
+    ./app/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.jsx [Client Component SSR]
+    ./app/page.jsx [Server Component]
+[00:05:24.131] Browser ERROR   ./app/page.jsx:683:1
+Parsing ecmascript source code failed
+  681 |     { name: "Documentation & Web", color: C.purple, members: [{ name: "Systems Engineer", role: "Requirements & Risk", bio: "Requirements tracking, risk register, review documentation SRR through FRR." }, { name: "Frontend Team", role: "Web & Visualisation", bio: "Mission dashboard, live telemetry display, map tracking and data visualisation." }] },
+  682 |   ];
+> 683 | >>>>>>> 277f3353077d092f030c33d6d8b830cc942bf0e5
+      | ^^^^^^^
+  684 |   return (
+  685 |     <section style={{ padding: "90px clamp(14px,4vw,60px)", background: `linear-gradient(180deg,transparent,${C.bgCardAlt}33,transparent)` }}>
+  686 |       <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./app/page.jsx [Client Component Browser]
+    ./app/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.jsx [Client Component SSR]
+    ./app/page.jsx [Server Component]
+[00:05:46.948] Server  LOG     ✓ Compiled in 300ms
+[00:05:47.931] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
