@@ -622,7 +622,7 @@ function TeamSection() {
   const teams = [
     { name: "Software Team", color: C.accent, members: [{ name: "MURAINA ABISOYE", role: "Backend And Visualization", bio: "Backend architecture, live telemetry data pipeline, real-time visualization and ground station software development" }
      ,{ name: "RAJI ABDULLAH OPEYEMI", role: "Frontend AND GRAPHICS", bio: "Frontend architecture, UI/UX design, mission dashboard, live telemetry display and graphics development"  }, 
-      { name: "CHIBUEKE VICTORY", role: "Frontend", bio: "Mission dashboard, live telemetry display" }] },
+      { name: "CHIBUEZE VICTORY", role: "Frontend", bio: "Mission dashboard, live telemetry display" }] },
     { name: "Avionics Team", color: C.blue, members: [{ name: "Avionics Engineer", role: "Electrical Architecture", bio: "PCB design, firmware implementation, power validation and telemetry testing." }, { name: "Firmware Developer", role: "Software & Control", bio: "MicroPython firmware, sensor polling, data pipeline and LoRa telemetry logic." }] },
     { name: "Mechanical & Structures", color: C.green, members: [{ name: "CAD Engineer", role: "Structural Design", bio: "CAD modeling, structural validation, impact tolerance and recovery system housing." }, { name: "Integration Lead", role: "Assembly & Recovery", bio: "Parachute mechanism, internal mounting architecture, balance optimisation." }] },
     { name: "Documentation & Web", color: C.purple, members: [{ name: "Systems Engineer", role: "Requirements & Risk", bio: "Requirements tracking, risk register, review documentation SRR through FRR." }, { name: "Frontend Team", role: "Web & Visualisation", bio: "Mission dashboard, live telemetry display, map tracking and data visualisation." }] },

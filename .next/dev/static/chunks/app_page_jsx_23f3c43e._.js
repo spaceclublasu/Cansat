@@ -2756,7 +2756,7 @@ function TeamSection() {
                     bio: "Frontend architecture, UI/UX design, mission dashboard, live telemetry display and graphics development"
                 },
                 {
-                    name: "CHIBUEKE VICTORY",
+                    name: "CHIBUEZE VICTORY",
                     role: "Frontend",
                     bio: "Mission dashboard, live telemetry display"
                 }
