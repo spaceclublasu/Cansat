@@ -622,7 +622,7 @@ function TeamSection() {
   const teams = [
     { name: "Software Team", color: C.accent, members: [{ name: "MURAINA ABISOYE", role: "Backend And Visualization", bio: "Backend architecture, live telemetry data pipeline, real-time visualization and ground station software development" }
      ,{ name: "RAJI ABDULLAH OPEYEMI", role: "Frontend AND GRAPHICS", bio: "Frontend architecture, UI/UX design, mission dashboard, live telemetry display and graphics development"  }, 
-      { name: "CHIBUEZE VICTORY", role: "Frontend", bio: "Mission dashboard, live telemetry display" }] },
+      { name: "CHIBUEKE VICTORY", role: "Frontend", bio: "Mission dashboard, live telemetry display" }] },
     { name: "Avionics Team", color: C.blue, members: [{ name: "Avionics Engineer", role: "Electrical Architecture", bio: "PCB design, firmware implementation, power validation and telemetry testing." }, { name: "Firmware Developer", role: "Software & Control", bio: "MicroPython firmware, sensor polling, data pipeline and LoRa telemetry logic." }] },
     { name: "Mechanical & Structures", color: C.green, members: [{ name: "CAD Engineer", role: "Structural Design", bio: "CAD modeling, structural validation, impact tolerance and recovery system housing." }, { name: "Integration Lead", role: "Assembly & Recovery", bio: "Parachute mechanism, internal mounting architecture, balance optimisation." }] },
     { name: "Documentation & Web", color: C.purple, members: [{ name: "Systems Engineer", role: "Requirements & Risk", bio: "Requirements tracking, risk register, review documentation SRR through FRR." }, { name: "Frontend Team", role: "Web & Visualisation", bio: "Mission dashboard, live telemetry display, map tracking and data visualisation." }] },
@@ -633,7 +633,7 @@ function TeamSection() {
         <div style={{ textAlign: "center", marginBottom: 44 }}>
           <SLabel text="Project Team" />
           <h2 style={{ fontFamily: "'Syne',sans-serif", fontSize: "clamp(26px,3.6vw,50px)", fontWeight: 800, color: C.white, margin: "0 0 12px" }}>The People Behind <span style={{ color: C.accent }}>the Mission</span></h2>
-          <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 15, color: C.muted, maxWidth: 480, margin: "0 auto" }}>Three functional teams under unified project leadership.</p>
+          <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 15, color: C.muted, maxWidth: 480, margin: "0 auto" }}>Five functional teams under unified project leadership.</p>
         </div>
         <div className="team-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 18, marginBottom: 44 }}>
           {teams.map(team => (
@@ -642,18 +642,22 @@ function TeamSection() {
                 <div style={{ width: 8, height: 8, borderRadius: "50%", background: team.color, boxShadow: `0 0 8px ${team.color}` }} />
                 <span style={{ fontFamily: "'Syne',sans-serif", fontSize: 13, fontWeight: 700, color: team.color }}>{team.name}</span>
               </div>
-              {team.members.map(m => (
-                <div key={m.name} style={{ padding: "15px 17px", borderBottom: `1px solid ${C.border}` }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 7 }}>
-                    <div style={{ width: 32, height: 32, borderRadius: "50%", background: team.color + "18", border: `1px solid ${team.color}44`, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Syne',sans-serif", fontSize: 13, fontWeight: 700, color: team.color, flexShrink: 0 }}>{m.name.charAt(0)}</div>
-                    <div>
-                      <div style={{ fontFamily: "'Syne',sans-serif", fontSize: 13, fontWeight: 600, color: C.white }}>{m.name}</div>
-                      <div style={{ fontFamily: "'Space Mono',monospace", fontSize: 9, color: team.color, letterSpacing: .8, textTransform: "uppercase" }}>{m.role}</div>
-                    </div>
-                  </div>
-                  <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 12, color: C.muted, lineHeight: 1.7, margin: 0 }}>{m.bio}</p>
-                </div>
-              ))}
+             {team.members.map(m => (
+  <div key={m.name} style={{ padding: "15px 17px", borderBottom: `1px solid ${C.border}` }}>
+    <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: m.bio ? 7 : 0 }}>
+      <div style={{ width: 32, height: 32, borderRadius: "50%", background: team.color + "18", border: `1px solid ${team.color}44`, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Syne',sans-serif", fontSize: 13, fontWeight: 700, color: team.color, flexShrink: 0 }}>
+        {m.name.charAt(0)}
+      </div>
+      <div>
+        <div style={{ fontFamily: "'Syne',sans-serif", fontSize: 13, fontWeight: 600, color: C.white }}>{m.name}</div>
+        <div style={{ fontFamily: "'Space Mono',monospace", fontSize: 9, color: team.color, letterSpacing: .8, textTransform: "uppercase" }}>{m.role}</div>
+      </div>
+    </div>
+    {m.bio && (
+      <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 12, color: C.muted, lineHeight: 1.7, margin: 0 }}>{m.bio}</p>
+    )}
+  </div>
+))}
             </div>
           ))}
         </div>

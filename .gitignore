@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+node_modules/
+.next/
+
+*.log
+logs/
+*.log.*
+=======
 
 node_modules/
 
@@ -17,3 +25,4 @@ yarn-error.log*
 pnpm-debug.log*
 
 .DS_Store
+>>>>>>> 277f3353077d092f030c33d6d8b830cc942bf0e5

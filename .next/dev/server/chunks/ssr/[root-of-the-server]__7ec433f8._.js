@@ -2717,7 +2717,7 @@ function TeamSection() {
                     bio: "Frontend architecture, UI/UX design, mission dashboard, live telemetry display and graphics development"
                 },
                 {
-                    name: "CHIBUEZE VICTORY",
+                    name: "CHIBUEKE VICTORY",
                     role: "Frontend",
                     bio: "Mission dashboard, live telemetry display"
                 }
@@ -2830,7 +2830,7 @@ function TeamSection() {
                                 maxWidth: 480,
                                 margin: "0 auto"
                             },
-                            children: "Three functional teams under unified project leadership."
+                            children: "Five functional teams under unified project leadership."
                         }, void 0, false, {
                             fileName: "[project]/app/page.jsx",
                             lineNumber: 636,
@@ -2911,7 +2911,7 @@ function TeamSection() {
                                                     display: "flex",
                                                     alignItems: "center",
                                                     gap: 10,
-                                                    marginBottom: 7
+                                                    marginBottom: m.bio ? 7 : 0
                                                 },
                                                 children: [
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2934,7 +2934,7 @@ function TeamSection() {
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/page.jsx",
                                                         lineNumber: 648,
-                                                        columnNumber: 21
+                                                        columnNumber: 7
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                         children: [
@@ -2948,8 +2948,8 @@ function TeamSection() {
                                                                 children: m.name
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/page.jsx",
-                                                                lineNumber: 650,
-                                                                columnNumber: 23
+                                                                lineNumber: 652,
+                                                                columnNumber: 9
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                 style: {
@@ -2962,22 +2962,22 @@ function TeamSection() {
                                                                 children: m.role
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/page.jsx",
-                                                                lineNumber: 651,
-                                                                columnNumber: 23
+                                                                lineNumber: 653,
+                                                                columnNumber: 9
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/page.jsx",
-                                                        lineNumber: 649,
-                                                        columnNumber: 21
+                                                        lineNumber: 651,
+                                                        columnNumber: 7
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/page.jsx",
                                                 lineNumber: 647,
-                                                columnNumber: 19
+                                                columnNumber: 5
                                             }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                            m.bio && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                 style: {
                                                     fontFamily: "'DM Sans',sans-serif",
                                                     fontSize: 12,
@@ -2988,14 +2988,14 @@ function TeamSection() {
                                                 children: m.bio
                                             }, void 0, false, {
                                                 fileName: "[project]/app/page.jsx",
-                                                lineNumber: 654,
-                                                columnNumber: 19
+                                                lineNumber: 657,
+                                                columnNumber: 7
                                             }, this)
                                         ]
                                     }, m.name, true, {
                                         fileName: "[project]/app/page.jsx",
                                         lineNumber: 646,
-                                        columnNumber: 17
+                                        columnNumber: 3
                                     }, this))
                             ]
                         }, team.name, true, {
@@ -3028,7 +3028,7 @@ function TeamSection() {
                             children: "Want to support Project CanSat?"
                         }, void 0, false, {
                             fileName: "[project]/app/page.jsx",
-                            lineNumber: 662,
+                            lineNumber: 666,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3042,7 +3042,7 @@ function TeamSection() {
                             children: "Sponsorships, donations, and institutional partnerships are open. Help us put Nigeria's first student CanSat in the sky."
                         }, void 0, false, {
                             fileName: "[project]/app/page.jsx",
-                            lineNumber: 663,
+                            lineNumber: 667,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3069,7 +3069,7 @@ function TeamSection() {
                                     children: "Donate to the Mission"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.jsx",
-                                    lineNumber: 665,
+                                    lineNumber: 669,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -3088,19 +3088,19 @@ function TeamSection() {
                                     children: "Join the Club"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.jsx",
-                                    lineNumber: 666,
+                                    lineNumber: 670,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.jsx",
-                            lineNumber: 664,
+                            lineNumber: 668,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.jsx",
-                    lineNumber: 661,
+                    lineNumber: 665,
                     columnNumber: 9
                 }, this)
             ]
@@ -3130,7 +3130,7 @@ function CanSatPage() {
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(GlobalStyles, {}, void 0, false, {
                 fileName: "[project]/app/page.jsx",
-                lineNumber: 688,
+                lineNumber: 692,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3142,7 +3142,7 @@ function CanSatPage() {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(StarField, {}, void 0, false, {
                         fileName: "[project]/app/page.jsx",
-                        lineNumber: 690,
+                        lineNumber: 694,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3156,19 +3156,19 @@ function CanSatPage() {
                                 setActive: setActiveTab
                             }, void 0, false, {
                                 fileName: "[project]/app/page.jsx",
-                                lineNumber: 692,
+                                lineNumber: 696,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
                                 className: "cansat-fade",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(ActiveSection, {}, void 0, false, {
                                     fileName: "[project]/app/page.jsx",
-                                    lineNumber: 694,
+                                    lineNumber: 698,
                                     columnNumber: 13
                                 }, this)
                             }, activeTab, false, {
                                 fileName: "[project]/app/page.jsx",
-                                lineNumber: 693,
+                                lineNumber: 697,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("footer", {
@@ -3198,7 +3198,7 @@ function CanSatPage() {
                                                 }
                                             }, void 0, false, {
                                                 fileName: "[project]/app/page.jsx",
-                                                lineNumber: 698,
+                                                lineNumber: 702,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -3210,13 +3210,13 @@ function CanSatPage() {
                                                 children: "PROJECT CANSAT — SPACE CLUBS LASU"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/page.jsx",
-                                                lineNumber: 699,
+                                                lineNumber: 703,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/page.jsx",
-                                        lineNumber: 697,
+                                        lineNumber: 701,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -3228,7 +3228,7 @@ function CanSatPage() {
                                         children: "Target Launch: April 12, 2026"
                                     }, void 0, false, {
                                         fileName: "[project]/app/page.jsx",
-                                        lineNumber: 701,
+                                        lineNumber: 705,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -3242,25 +3242,25 @@ function CanSatPage() {
                                         children: "← spaceclubslasu.org"
                                     }, void 0, false, {
                                         fileName: "[project]/app/page.jsx",
-                                        lineNumber: 702,
+                                        lineNumber: 706,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/page.jsx",
-                                lineNumber: 696,
+                                lineNumber: 700,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/page.jsx",
-                        lineNumber: 691,
+                        lineNumber: 695,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/page.jsx",
-                lineNumber: 689,
+                lineNumber: 693,
                 columnNumber: 7
             }, this)
         ]
