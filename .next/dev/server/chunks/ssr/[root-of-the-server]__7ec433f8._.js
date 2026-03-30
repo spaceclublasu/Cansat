@@ -491,7 +491,7 @@ function CanSatNav({ active, setActive }) {
                                 color: C.white,
                                 letterSpacing: 2
                             },
-                            children: "PROJECT CANSAT"
+                            children: "PROJECT EKOSAT"
                         }, void 0, false, {
                             fileName: "[project]/app/page.jsx",
                             lineNumber: 200,
@@ -695,7 +695,7 @@ function OverviewSection() {
                                             style: {
                                                 color: C.accent
                                             },
-                                            children: "CanSat"
+                                            children: "EkoSat"
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.jsx",
                                             lineNumber: 242,
@@ -988,7 +988,7 @@ function MissionSection() {
                                     lineHeight: 1.85,
                                     marginBottom: 18
                                 },
-                                children: "Project CanSat is SPACE CLUBS LASU's inaugural hardware mission — bridging the gap between classroom theory and real-world aerospace systems engineering. The satellite flies to 100 m–1 km, logging and streaming time-series data throughout."
+                                children: "Project EkoSat is SPACE CLUBS LASU's inaugural hardware mission — bridging the gap between classroom theory and real-world aerospace systems engineering. The satellite flies to 100 m–1 km, logging and streaming time-series data throughout."
                             }, void 0, false, {
                                 fileName: "[project]/app/page.jsx",
                                 lineNumber: 293,
@@ -3072,7 +3072,7 @@ function TeamSection() {
                                 color: C.white,
                                 marginBottom: 10
                             },
-                            children: "Want to support Project CanSat?"
+                            children: "Want to support Project EkoSat?"
                         }, void 0, false, {
                             fileName: "[project]/app/page.jsx",
                             lineNumber: 709,
@@ -3254,7 +3254,7 @@ function CanSatPage() {
                                                     fontSize: 10,
                                                     color: C.muted
                                                 },
-                                                children: "PROJECT CANSAT — SPACE CLUBS LASU"
+                                                children: "PROJECT EKOSAT — SPACE CLUBS LASU"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/page.jsx",
                                                 lineNumber: 746,
