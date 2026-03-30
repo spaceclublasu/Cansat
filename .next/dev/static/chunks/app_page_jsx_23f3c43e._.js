@@ -508,7 +508,7 @@ function CanSatNav({ active, setActive }) {
                                 color: C.white,
                                 letterSpacing: 2
                             },
-                            children: "PROJECT EKOSAT"
+                            children: "EKOSAT-1"
                         }, void 0, false, {
                             fileName: "[project]/app/page.jsx",
                             lineNumber: 200,
@@ -702,25 +702,17 @@ function OverviewSection() {
                                         margin: "0 0 20px",
                                         color: C.white
                                     },
-                                    children: [
-                                        "Project",
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
-                                            fileName: "[project]/app/page.jsx",
-                                            lineNumber: 242,
-                                            columnNumber: 22
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                            style: {
-                                                color: C.accent
-                                            },
-                                            children: "EkoSat"
-                                        }, void 0, false, {
-                                            fileName: "[project]/app/page.jsx",
-                                            lineNumber: 242,
-                                            columnNumber: 28
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        style: {
+                                            color: C.accent
+                                        },
+                                        children: "EkoSat-1"
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/page.jsx",
+                                        lineNumber: 242,
+                                        columnNumber: 16
+                                    }, this)
+                                }, void 0, false, {
                                     fileName: "[project]/app/page.jsx",
                                     lineNumber: 241,
                                     columnNumber: 13
@@ -1007,7 +999,7 @@ function MissionSection() {
                                     lineHeight: 1.85,
                                     marginBottom: 18
                                 },
-                                children: "Project EkoSat is SPACE CLUBS LASU's inaugural hardware mission — bridging the gap between classroom theory and real-world aerospace systems engineering. The satellite flies to 100 m–1 km, logging and streaming time-series data throughout."
+                                children: "EKOSAT-1 is SPACE CLUBS LASU's inaugural hardware mission — bridging the gap between classroom theory and real-world aerospace systems engineering. The satellite flies to 100 m–1 km, logging and streaming time-series data throughout."
                             }, void 0, false, {
                                 fileName: "[project]/app/page.jsx",
                                 lineNumber: 293,
@@ -3111,7 +3103,7 @@ function TeamSection() {
                                 color: C.white,
                                 marginBottom: 10
                             },
-                            children: "Want to support Project EkoSat?"
+                            children: "Want to support EkoSat-1?"
                         }, void 0, false, {
                             fileName: "[project]/app/page.jsx",
                             lineNumber: 709,
@@ -3295,7 +3287,7 @@ function CanSatPage() {
                                                     fontSize: 10,
                                                     color: C.muted
                                                 },
-                                                children: "PROJECT EKOSAT — SPACE CLUBS LASU"
+                                                children: "EKOSAT-1 — SPACE CLUBS LASU"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/page.jsx",
                                                 lineNumber: 746,

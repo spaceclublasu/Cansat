@@ -197,7 +197,7 @@ function CanSatNav({ active, setActive }) {
       <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 clamp(14px,4vw,60px)", display: "flex", alignItems: "center", gap: 4 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8, marginRight: 18, padding: "14px 0", flexShrink: 0 }}>
           <div style={{ width: 7, height: 7, borderRadius: "50%", background: C.accent, boxShadow: `0 0 8px ${C.accent}` }} />
-          <span style={{ fontFamily: "'Space Mono',monospace", fontSize: 10, color: C.white, letterSpacing: 2 }}>PROJECT EKOSAT</span>
+          <span style={{ fontFamily: "'Space Mono',monospace", fontSize: 10, color: C.white, letterSpacing: 2 }}>EKOSAT-1</span>
         </div>
         <div className="tab-scroll" style={{ flex: 1, display: "flex" }}>
           <div style={{ display: "flex", gap: 2, minWidth: "max-content" }}>
@@ -239,7 +239,7 @@ function OverviewSection() {
           <div>
             <SLabel text="Space Clubs LASU — Flagship Mission" />
             <h1 style={{ fontFamily: "'Syne',sans-serif", fontSize: "clamp(38px,5.8vw,74px)", fontWeight: 800, lineHeight: 1.02, margin: "0 0 20px", color: C.white }}>
-              Project<br /><span style={{ color: C.accent }}>EkoSat</span>
+               <span style={{ color: C.accent }}>EkoSat-1</span>
             </h1>
             <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "clamp(14px,1.5vw,17px)", color: C.muted, lineHeight: 1.8, maxWidth: 500, marginBottom: 34 }}>
               LASU's first hands-on aerospace mission — a miniature satellite designed, built and launched by students. It reaches altitudes up to 1 km, streams real-time sensor telemetry via LoRa RF, and recovers safely by parachute.
@@ -291,7 +291,7 @@ function MissionSection() {
             <SLabel text="Mission Definition" />
             <h2 style={{ fontFamily: "'Syne',sans-serif", fontSize: "clamp(26px,3.6vw,50px)", fontWeight: 800, color: C.white, margin: "0 0 18px", lineHeight: 1.1 }}>From Theory<br /><span style={{ color: C.accent }}>to Flight</span></h2>
             <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 15, color: C.muted, lineHeight: 1.85, marginBottom: 18 }}>
-              Project EkoSat is SPACE CLUBS LASU's inaugural hardware mission — bridging the gap between classroom theory and real-world aerospace systems engineering. The satellite flies to 100 m–1 km, logging and streaming time-series data throughout.
+              EKOSAT-1 is SPACE CLUBS LASU's inaugural hardware mission — bridging the gap between classroom theory and real-world aerospace systems engineering. The satellite flies to 100 m–1 km, logging and streaming time-series data throughout.
             </p>
             <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 15, color: C.muted, lineHeight: 1.85, marginBottom: 28 }}>
               Every phase follows formal aerospace review gates: SRR → PDR → CDR → TRR → FRR. This is not an experiment — it is a controlled, documented, performance-driven programme.
@@ -706,7 +706,7 @@ function TeamSection() {
         </div>
         {/* CTA */}
         <div style={{ textAlign: "center", padding: "clamp(24px,4vw,48px)", background: C.bgCard, border: `1px solid ${C.border}`, borderRadius: 16 }}>
-          <div style={{ fontFamily: "'Syne',sans-serif", fontSize: "clamp(18px,2.6vw,28px)", fontWeight: 800, color: C.white, marginBottom: 10 }}>Want to support Project EkoSat?</div>
+          <div style={{ fontFamily: "'Syne',sans-serif", fontSize: "clamp(18px,2.6vw,28px)", fontWeight: 800, color: C.white, marginBottom: 10 }}>Want to support EkoSat-1?</div>
           <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 15, color: C.muted, maxWidth: 440, margin: "0 auto 26px" }}>Sponsorships, donations, and institutional partnerships are open. Help us put Nigeria's first student CanSat in the sky.</p>
           <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
             <a href="https://www.spaceclubslasu.org/donate" style={{ padding: "13px 28px", background: C.accent, borderRadius: 6, color: "#fff", textDecoration: "none", fontFamily: "'Space Mono',monospace", fontSize: 11, letterSpacing: 1, boxShadow: `0 4px 18px ${C.accent}44` }}>Donate to the Mission</a>
@@ -743,7 +743,7 @@ export default function CanSatPage() {
           <footer style={{ borderTop: `1px solid ${C.border}`, padding: "22px clamp(14px,4vw,60px)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 10 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <div style={{ width: 6, height: 6, borderRadius: "50%", background: C.accent }} />
-              <span style={{ fontFamily: "'Space Mono',monospace", fontSize: 10, color: C.muted }}>PROJECT EKOSAT — SPACE CLUBS LASU</span>
+              <span style={{ fontFamily: "'Space Mono',monospace", fontSize: 10, color: C.muted }}>EKOSAT-1 — SPACE CLUBS LASU</span>
             </div>
             <span style={{ fontFamily: "'Space Mono',monospace", fontSize: 9, color: C.muted }}>Target Launch: April 12, 2026</span>
             <a href="https://www.spaceclubslasu.org" style={{ fontFamily: "'Space Mono',monospace", fontSize: 9, color: C.muted, textDecoration: "none" }}>← spaceclubslasu.org</a>
