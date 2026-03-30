@@ -1,28 +1,16 @@
-<<<<<<< HEAD
 node_modules/
 .next/
-
+*.swp
 *.log
 logs/
 *.log.*
-=======
-
-node_modules/
-
-
-.next/
 out/
-
-
 .env
 .env.local
 .env.production.local
 .env.development.local
-
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-
 .DS_Store
->>>>>>> 277f3353077d092f030c33d6d8b830cc942bf0e5
