@@ -4,16 +4,14 @@
 
 import asyncio
 from websockets.asyncio.client import connect
-message =[]
-
-async def hello():
+async def get_data():
     async with connect("ws://localhost:4443") as websocket:
        # message = await websocket.recv()
         async for message in websocket:
             print(message)
 try:
     while True:
-       asyncio.run(hello())
+       asyncio.run(get_data())
 except KeyboardInterrupt:
     print("\n connection closed\n")
 
