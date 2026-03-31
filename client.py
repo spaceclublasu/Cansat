@@ -8,9 +8,12 @@ message =[]
 
 async def hello():
     async with connect("ws://localhost:4443") as websocket:
-        message.append(await websocket.recv())
-        print(message)
-while True:
+       # message = await websocket.recv()
+        async for message in websocket:
+            print(message)
+try:
+    while True:
        asyncio.run(hello())
-
+except KeyboardInterrupt:
+    print("\n connection closed\n")
 
