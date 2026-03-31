@@ -1,9 +1,9 @@
-"this is a cansat telemetry simulation program designed to simulate how a cansat sends data, to the ground station for visualization and storage. It is used to unders\tand how to visualize and store data properly"
+"this is a cansat telemetry simulation program designed to simulate how a cansat sends data, to the g  station for visualization and storage. It is used to unders\tand how to visualize and store data properly"
 import time
 import json
 import asyncio
 import websockets
-from random import uniform as aligned
+from random import randint as aligned
 
 """ i created 
 1. an empty variable called telemetry which is a collections/set datatype. It is used to store the environmental variables and values,  
@@ -15,25 +15,32 @@ telemetry = {}
 interval = 1/50
 telemetry = {"altitude": 0}
 
-""" i created a sensor_simulation function to try and simulate data delivery from the cansat to the ground station"""
+""" i created a sensor_simulation function to try and simulate data delivery from the cansat to the g  station"""
 def sensor_simulator():
-    telemetry["pressure"] = round(aligned(20, 30), 2)
-    telemetry["humidity"] = round(aligned(20, 30), 2)  
-    telemetry["temperature"] = round(aligned(20, 30), 2)
-    telemetry["altitude"] +=0.4 
+    telemetry["pressure"] = aligned(0, 100000)
+    telemetry["humidity"] = aligned(0,1000)  
+    telemetry["temperature"] = aligned(0, 20000)
+    telemetry["altitude"] +=1
+    telemetry["voltage"] = aligned(0, 5000)
+    telemetry["acceleration"] = [aligned(0, 1000), aligned(0, 1000), aligned(0, 1000)]
+    telemetry["GPS Lattitude"] = aligned(0, 999999)
+    telemetry["GPS Longitude"] = aligned(0, 999999)
+    telemetry["Gyro"] = [aligned(0, 1000), aligned(0, 1000), aligned(0, 1000)]
+    telemetry["timestamp"] =aligned(10000000, 99999999)
+    telemetry["Luminous Intensity"] =aligned(0, 999)
+    telemetry["current"] =aligned(0, 9999)
     return telemetry
         
 """ i created an asynchronous data streaming function to broadcast data telemetry data from from the server"""
 
 async def stream_data(websocket):
-    while telemetry["altitude"] < 1000:
+    while telemetry["altitude"] < 999.6:
         data = sensor_simulator()
         try:
             await websocket.send(json.dumps(data))
-        except websockets:exceptions.ConnectionClosedOK:
-
-
-        await asyncio.sleep(0.02)  # 50 Hz
+        except websockets.exceptions.ConnectionClosedOk:
+           break
+      ##finally:continue
 
 """i created the asynchronous main function to start the asynchronous web server and end it """
 async def main():
