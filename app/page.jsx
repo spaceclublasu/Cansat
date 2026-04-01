@@ -377,183 +377,378 @@ function SystemsSection() {
 
 
 
-function TelemetrySection() {
-  const [logIdx, setLogIdx] = useState(0);
-  const [pct, setPct] = useState(0);
+// ─── SECTION: LIVE TELEMETRY ─────────────────────────────────────────────────
+// Replace your entire TelemetrySection function with this one.
+// Make sure your server.py is running on port 4443 before testing.
 
-  const logs = [
-    "[SCAN]  Sweeping 433MHz band...",
-    "[RX]    Packet fragment detected...",
-    "[ERR]   Signal lost — retrying...",
-    "[SCAN]  Adjusting antenna gain...",
-    "[RX]    LoRa preamble detected...",
-    "[ERR]   CRC mismatch — discarding...",
-    "[SCAN]  Searching for CanSat beacon...",
-    "[ERR]   No telemetry stream detected",
+function TelemetrySection() {
+  const [isLive, setIsLive] = useState(false);
+  const [connected, setConnected] = useState(false);
+  const [phase, setPhase] = useState("STANDBY");
+  const [elapsed, setElapsed] = useState(0);
+  const [error, setError] = useState(null);
+  const wsRef = useRef(null);
+  const bufferRef = useRef([]);
+  const renderRef = useRef(null);
+  const elapsedRef = useRef(null);
+
+  // ── Chart state — all sensors from server.py ─────────────────────────────
+  const [alt, setAlt] = useState(() => makeSeries(0, 0, 2));
+  const [temp, setTemp] = useState(() => makeSeries(0, 0, 2));
+  const [pressure, setPressure] = useState(() => makeSeries(0, 0, 2));
+  const [humidity, setHumidity] = useState(() => makeSeries(0, 0, 2));
+  const [accelX, setAccelX] = useState(() => makeSeries(0, 0, 2));
+  const [accelY, setAccelY] = useState(() => makeSeries(0, 0, 2));
+  const [light, setLight] = useState(() => makeSeries(0, 0, 2));
+  const [voltage, setVoltage] = useState(() => makeSeries(0, 0, 2));
+  const [gyroX, setGyroX] = useState(() => makeSeries(0, 0, 2));
+  const [current, setCurrent] = useState(() => makeSeries(0, 0, 2));
+
+  // GPS — just show latest value, no chart needed
+  const [gps, setGps] = useState({ lat: null, lon: null });
+
+  const doReset = () => {
+    setAlt(makeSeries(0, 0, 2));
+    setTemp(makeSeries(0, 0, 2));
+    setPressure(makeSeries(0, 0, 2));
+    setHumidity(makeSeries(0, 0, 2));
+    setAccelX(makeSeries(0, 0, 2));
+    setAccelY(makeSeries(0, 0, 2));
+    setLight(makeSeries(0, 0, 2));
+    setVoltage(makeSeries(0, 0, 2));
+    setGyroX(makeSeries(0, 0, 2));
+    setCurrent(makeSeries(0, 0, 2));
+    setGps({ lat: null, lon: null });
+    setElapsed(0);
+    setPhase("STANDBY");
+    setError(null);
+  };
+
+  // ── WebSocket connection ──────────────────────────────────────────────────
+  const connect = () => {
+    if (wsRef.current) wsRef.current.close();
+    setError(null);
+
+   const ws = new WebSocket("ws://127.0.0.1:4443");
+    wsRef.current = ws;
+
+    ws.onopen = () => {
+      setConnected(true);
+      setIsLive(true);
+      setPhase("ASCENT");
+    };
+
+    const connect = () => {
+  if (wsRef.current) {
+    wsRef.current.close();
+    wsRef.current = null;
+  }
+  setError(null);
+  setConnected(false);
+
+  // Small delay so previous connection fully closes
+  setTimeout(() => {
+    const ws = new WebSocket("ws://localhost:4443");
+    wsRef.current = ws;
+
+    ws.onopen = () => {
+      setConnected(true);
+      setIsLive(true);
+      setPhase("ASCENT");
+    };
+
+    ws.onmessage = (event) => {
+      try {
+        const data = JSON.parse(event.data);
+        bufferRef.current.push(data);
+      } catch (_) {}
+    };
+
+    ws.onerror = () => {
+      setError("Cannot reach server — make sure server.py is running on port 4443");
+      setConnected(false);
+      setIsLive(false);
+      setPhase("STANDBY");
+    };
+
+    ws.onclose = () => {
+      setConnected(false);
+      setIsLive(false);
+      if (phase !== "STANDBY") setPhase("LANDED");
+    };
+  }, 100);
+};
+
+    // Buffer ALL 50 packets/sec
+    ws.onmessage = (event) => {
+      try {
+        const data = JSON.parse(event.data);
+        bufferRef.current.push(data);
+      } catch (_) {}
+    };
+
+    ws.onerror = () => {
+      setError("Cannot reach server — make sure server.py is running on port 4443");
+      setConnected(false);
+      setIsLive(false);
+      setPhase("STANDBY");
+    };
+
+    ws.onclose = () => {
+      setConnected(false);
+      setIsLive(false);
+      setPhase("LANDED");
+    };
+  };
+
+  const disconnect = () => {
+    if (wsRef.current) wsRef.current.close();
+    setIsLive(false);
+    setConnected(false);
+    setPhase("STANDBY");
+  };
+
+  // ── Throttled render — update charts at 5fps regardless of incoming rate ─
+  useEffect(() => {
+    if (!isLive) {
+      if (renderRef.current) clearInterval(renderRef.current);
+      if (elapsedRef.current) clearInterval(elapsedRef.current);
+      return;
+    }
+
+    // Elapsed counter
+    elapsedRef.current = setInterval(() => setElapsed(e => e + 1), 1000);
+
+    // Chart update — 5 times per second (200ms)
+    renderRef.current = setInterval(() => {
+      if (bufferRef.current.length === 0) return;
+
+      // Take latest packet from buffer
+      const data = bufferRef.current[bufferRef.current.length - 1];
+      bufferRef.current = [];
+
+      // Map server.py fields to charts
+      if (data.altitude !== undefined) {
+        setAlt(prev => [...prev.slice(-(MAX_PTS - 1)), { t: "now", v: +data.altitude.toFixed(1) }]);
+        // Detect phase from altitude
+        if (data.altitude >= 990) setPhase("DESCENT");
+        else if (data.altitude <= 2 && data.altitude > 0) setPhase("LANDED");
+        else if (data.altitude > 2) setPhase("ASCENT");
+      }
+      if (data.temperature !== undefined)
+        setTemp(prev => [...prev.slice(-(MAX_PTS - 1)), { t: "now", v: +data.temperature.toFixed(1) }]);
+      if (data.pressure !== undefined)
+        setPressure(prev => [...prev.slice(-(MAX_PTS - 1)), { t: "now", v: +data.pressure.toFixed(1) }]);
+      if (data.humidity !== undefined)
+        setHumidity(prev => [...prev.slice(-(MAX_PTS - 1)), { t: "now", v: +data.humidity.toFixed(1) }]);
+      if (data.acceleration !== undefined) {
+        setAccelX(prev => [...prev.slice(-(MAX_PTS - 1)), { t: "now", v: +data.acceleration[0].toFixed(2) }]);
+        setAccelY(prev => [...prev.slice(-(MAX_PTS - 1)), { t: "now", v: +data.acceleration[1].toFixed(2) }]);
+      }
+      if (data["Luminous Intensity"] !== undefined)
+        setLight(prev => [...prev.slice(-(MAX_PTS - 1)), { t: "now", v: +data["Luminous Intensity"].toFixed(0) }]);
+      if (data.voltage !== undefined)
+        setVoltage(prev => [...prev.slice(-(MAX_PTS - 1)), { t: "now", v: +data.voltage.toFixed(1) }]);
+      if (data.Gyro !== undefined)
+        setGyroX(prev => [...prev.slice(-(MAX_PTS - 1)), { t: "now", v: +data.Gyro[0].toFixed(2) }]);
+      if (data.current !== undefined)
+        setCurrent(prev => [...prev.slice(-(MAX_PTS - 1)), { t: "now", v: +data.current.toFixed(1) }]);
+      if (data["GPS Lattitude"] !== undefined)
+        setGps({ lat: data["GPS Lattitude"], lon: data["GPS Longitude"] });
+
+    }, 1000);
+
+    return () => {
+      clearInterval(renderRef.current);
+      clearInterval(elapsedRef.current);
+    };
+  }, [isLive]);
+
+  // Cleanup on unmount
+  useEffect(() => () => { if (wsRef.current) wsRef.current.close(); }, []);
+
+  // ── Latest values ─────────────────────────────────────────────────────────
+  const L = {
+    alt:      alt[alt.length - 1]?.v.toFixed(1),
+    temp:     temp[temp.length - 1]?.v.toFixed(1),
+    pressure: pressure[pressure.length - 1]?.v.toFixed(1),
+    humidity: humidity[humidity.length - 1]?.v.toFixed(1),
+    accelX:   accelX[accelX.length - 1]?.v.toFixed(2),
+    accelY:   accelY[accelY.length - 1]?.v.toFixed(2),
+    light:    light[light.length - 1]?.v.toFixed(0),
+    voltage:  voltage[voltage.length - 1]?.v.toFixed(1),
+    gyroX:    gyroX[gyroX.length - 1]?.v.toFixed(2),
+    current:  current[current.length - 1]?.v.toFixed(1),
+  };
+
+  const phaseCol = { ASCENT: C.green, DESCENT: C.accent, LANDED: C.blue, STANDBY: C.muted };
+  const pCol = phaseCol[phase] || C.muted;
+
+  const topCards = [
+    { label: "Altitude",    val: L.alt,      unit: "m",   color: C.green,        icon: "↑" },
+    { label: "Temperature", val: L.temp,     unit: "°C",  color: "#FF6B6B",      icon: "🌡" },
+    { label: "Pressure",    val: L.pressure, unit: "Pa",  color: C.blue,         icon: "⬤" },
+    { label: "Voltage",     val: L.voltage,  unit: "mV",  color: C.yellow,       icon: "⚡" },
   ];
 
-  useEffect(() => {
-    const logTimer = setInterval(() => setLogIdx(i => (i + 1) % logs.length), 2000);
-    const pctTimer = setInterval(() => setPct(p => (p + Math.floor(Math.random() * 15)) % 100), 800);
-    return () => { clearInterval(logTimer); clearInterval(pctTimer); };
-  }, []);
-
-  const barColors = ["#27C47A", "#FF6B6B", "#1A6CFF", "#FFB800", "#9B59B6", "#38BDF8"];
-  const barHeights = [6, 10, 14, 18, 14, 10, 6];
+  const subCharts = [
+    { label: "Temperature",       data: temp,     color: "#FF6B6B",   unit: "°C",  val: L.temp     },
+    { label: "Pressure",          data: pressure, color: C.blue,      unit: "Pa",  val: L.pressure },
+    { label: "Humidity",          data: humidity, color: C.cyan,      unit: "%",   val: L.humidity },
+    { label: "Accel X",           data: accelX,   color: C.yellow,    unit: "",    val: L.accelX   },
+    { label: "Accel Y",           data: accelY,   color: C.accentSoft,unit: "",    val: L.accelY   },
+    { label: "Light Intensity",   data: light,    color: "#FFD700",   unit: "lux", val: L.light    },
+    { label: "Voltage",           data: voltage,  color: C.yellow,    unit: "mV",  val: L.voltage  },
+    { label: "Gyro X",            data: gyroX,    color: C.purple,    unit: "",    val: L.gyroX    },
+    { label: "Current",           data: current,  color: C.green,     unit: "mA",  val: L.current  },
+  ];
 
   return (
-    <section style={{ minHeight: "88vh", display: "flex", alignItems: "center", justifyContent: "center", padding: "80px clamp(14px,4vw,60px)", position: "relative", overflow: "hidden" }}>
+    <section style={{ padding: "90px clamp(14px,4vw,60px)" }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto" }}>
 
-      {/* Animated CSS styles */}
-      <style>{`
-        @keyframes orbit1 { to { transform: rotate(360deg); } }
-        @keyframes orbit2 { to { transform: rotate(-360deg); } }
-        @keyframes barPulse {
-          0%,100% { background: #141D30; box-shadow: none; }
-          50% { background: #E8612A; box-shadow: 0 0 8px rgba(232,97,42,0.5); }
-        }
-        @keyframes progressAnim {
-          0%   { width: 0%;  opacity: 1; }
-          70%  { width: 85%; opacity: 1; }
-          90%  { width: 85%; opacity: 0.5; }
-          100% { width: 0%;  opacity: 0; }
-        }
-        @keyframes logFadeIn {
-          from { opacity:0; transform: translateY(5px); }
-          to   { opacity:1; transform: translateY(0); }
-        }
-        @keyframes gradientShift {
-          0%,100% { background-position: 0% 50%; }
-          50%     { background-position: 100% 50%; }
-        }
-        @keyframes floatSat {
-          0%,100% { transform: translateY(0px); }
-          50%     { transform: translateY(-8px); }
-        }
-        @keyframes scanline {
-          0%   { top: -10%; opacity: 0.6; }
-          100% { top: 110%; opacity: 0; }
-        }
-        .bar-pulse-1 { animation: barPulse 1.8s ease-in-out infinite 0s; }
-        .bar-pulse-2 { animation: barPulse 1.8s ease-in-out infinite 0.15s; }
-        .bar-pulse-3 { animation: barPulse 1.8s ease-in-out infinite 0.3s; }
-        .bar-pulse-4 { animation: barPulse 1.8s ease-in-out infinite 0.45s; }
-        .bar-pulse-5 { animation: barPulse 1.8s ease-in-out infinite 0.6s; }
-        .bar-pulse-6 { animation: barPulse 1.8s ease-in-out infinite 0.75s; }
-        .bar-pulse-7 { animation: barPulse 1.8s ease-in-out infinite 0.9s; }
-        .progress-fill-anim { animation: progressAnim 3s ease-in-out infinite; }
-        .log-fade { animation: logFadeIn 0.4s ease both; }
-        .sat-float { animation: floatSat 3s ease-in-out infinite; }
-        .tele-preview-wrap { filter: blur(1.5px); opacity: 0.3; pointer-events: none; }
-      `}</style>
-
-      {/* Grid background */}
-      <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(26,108,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(26,108,255,0.04) 1px, transparent 1px)", backgroundSize: "40px 40px", pointerEvents: "none" }} />
-
-      {/* Glow orbs */}
-      <div style={{ position: "absolute", top: "-10%", right: "-5%", width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle, rgba(26,108,255,0.09) 0%, transparent 70%)", pointerEvents: "none" }} />
-      <div style={{ position: "absolute", bottom: "-5%", left: "-5%", width: 320, height: 320, borderRadius: "50%", background: "radial-gradient(circle, rgba(232,97,42,0.07) 0%, transparent 70%)", pointerEvents: "none" }} />
-      <div style={{ position: "absolute", top: "40%", left: "10%", width: 200, height: 200, borderRadius: "50%", background: "radial-gradient(circle, rgba(39,196,122,0.05) 0%, transparent 70%)", pointerEvents: "none" }} />
-
-      {/* Scanline effect on blurred cards */}
-      <div style={{ position: "absolute", left: 0, right: 0, height: "2px", background: "linear-gradient(90deg, transparent, rgba(232,97,42,0.4), transparent)", animation: "scanline 4s linear infinite", pointerEvents: "none", zIndex: 2 }} />
-
-      {/* Main content */}
-      <div style={{ position: "relative", zIndex: 10, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", maxWidth: 560, width: "100%" }}>
-
-        {/* Satellite orbit icon */}
-        <div className="sat-float" style={{ position: "relative", width: 120, height: 120, marginBottom: 28, flexShrink: 0 }}>
-          {/* Outer orbit ring */}
-          <div style={{ position: "absolute", inset: 0, borderRadius: "50%", border: "1px solid rgba(232,97,42,0.25)", animation: "orbit1 6s linear infinite" }}>
-            <div style={{ position: "absolute", width: 8, height: 8, background: "#E8612A", borderRadius: "50%", top: -4, left: "50%", transform: "translateX(-50%)", boxShadow: "0 0 10px #E8612A, 0 0 20px rgba(232,97,42,0.4)" }} />
+        {/* ── Header ── */}
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 16, marginBottom: 36 }}>
+          <div>
+            <SLabel text="Live Telemetry Dashboard" />
+            <h2 style={{ fontFamily: "'Syne',sans-serif", fontSize: "clamp(26px,3.6vw,50px)", fontWeight: 800, color: C.white, margin: "0 0 8px" }}>
+              Mission <span style={{ color: C.accent }}>Data Stream</span>
+            </h2>
+            <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 14, color: C.muted }}>
+              Real-time sensor data · WebSocket · Port 4443 · 50 Hz incoming · 5 Hz rendered
+            </p>
           </div>
-          {/* Inner orbit ring */}
-          <div style={{ position: "absolute", inset: 14, borderRadius: "50%", border: "1px solid rgba(26,108,255,0.2)", animation: "orbit2 4s linear infinite" }}>
-            <div style={{ position: "absolute", width: 6, height: 6, background: "#1A6CFF", borderRadius: "50%", bottom: -3, left: "50%", transform: "translateX(-50%)", boxShadow: "0 0 8px #1A6CFF, 0 0 16px rgba(26,108,255,0.4)" }} />
-          </div>
-          {/* Center */}
-          <div style={{ position: "absolute", inset: 28, background: "#070C18", border: "1px solid #1A2540", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 26 }}>🛰️</div>
-        </div>
 
-        {/* Signal bars */}
-        <div style={{ display: "flex", alignItems: "flex-end", gap: 3, height: 20, marginBottom: 24 }}>
-          {barHeights.map((h, i) => (
-            <div key={i} className={`bar-pulse-${i + 1}`} style={{ width: 5, height: h, borderRadius: 2, background: "#141D30", transition: "background 0.3s" }} />
-          ))}
-        </div>
-
-        {/* Status chip */}
-        <div style={{ display: "inline-flex", alignItems: "center", gap: 7, padding: "5px 14px", background: "rgba(232,97,42,0.1)", border: "1px solid rgba(232,97,42,0.3)", borderRadius: 20, fontFamily: "'Space Mono',monospace", fontSize: 10, letterSpacing: 2, color: "#E8612A", marginBottom: 18 }}>
-          <div className="live-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#E8612A" }} />
-          TELEMETRY LINK OFFLINE
-        </div>
-
-        {/* 404 */}
-        <div style={{ fontFamily: "'Space Mono',monospace", fontSize: "clamp(64px,12vw,96px)", fontWeight: 700, background: "linear-gradient(135deg, #E8612A, #FF7A42 40%, #FFB800)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", lineHeight: 1, marginBottom: 10, letterSpacing: -3 }}>404</div>
-
-        <h2 style={{ fontFamily: "'Syne',sans-serif", fontSize: "clamp(20px,3vw,28px)", fontWeight: 800, color: "#F0F4FF", marginBottom: 14 }}>
-          Signal Not Found<span style={{ color: "#E8612A" }}>.</span>
-        </h2>
-
-        <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 15, color: "#7A8FAD", lineHeight: 1.8, marginBottom: 28, maxWidth: 420 }}>
-          The live telemetry dashboard is under construction. Ground station integration and LoRa data pipeline are being configured. Check back closer to launch —{" "}
-          <strong style={{ color: "#F0F4FF" }}>Apr 12, 2026</strong>.
-        </p>
-
-        {/* Blurred ghost preview of telemetry cards */}
-        <div className="tele-preview-wrap" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10, width: "100%", marginBottom: 24, position: "relative" }}>
-          {[
-            { label: "Altitude",     val: "— m",    color: "#27C47A", w: "60%" },
-            { label: "Temperature",  val: "— °C",   color: "#FF6B6B", w: "45%" },
-            { label: "Pressure",     val: "— hPa",  color: "#1A6CFF", w: "75%" },
-          ].map(card => (
-            <div key={card.label} style={{ background: "#070C18", border: "1px solid #141D30", borderRadius: 8, padding: "12px 14px", textAlign: "left" }}>
-              <div style={{ fontFamily: "'Space Mono',monospace", fontSize: 8, color: "#7A8FAD", letterSpacing: 1.5, textTransform: "uppercase", marginBottom: 5 }}>{card.label}</div>
-              <div style={{ fontFamily: "'Syne',sans-serif", fontSize: 20, fontWeight: 700, color: card.color, marginBottom: 8 }}>{card.val}</div>
-              <div style={{ height: 3, background: "#141D30", borderRadius: 2 }}>
-                <div style={{ width: card.w, height: "100%", background: card.color, borderRadius: 2 }} />
-              </div>
+          {/* Controls */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 9, minWidth: 220 }}>
+            {/* Status chip */}
+            <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "9px 14px", background: C.bgCard, border: `1px solid ${pCol}44`, borderRadius: 8 }}>
+              <div className="live-dot" style={{ width: 7, height: 7, borderRadius: "50%", background: connected ? pCol : C.muted, flexShrink: 0 }} />
+              <span style={{ fontFamily: "'Space Mono',monospace", fontSize: 10, color: connected ? pCol : C.muted, letterSpacing: 1 }}>
+                {connected ? `● ${phase}` : "○ DISCONNECTED"}
+              </span>
+              <div style={{ marginLeft: "auto", fontFamily: "'Space Mono',monospace", fontSize: 9, color: C.muted }}>T+{elapsed}s</div>
             </div>
-          ))}
-          {/* No signal overlay */}
-          <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(4,6,15,0.5)", borderRadius: 8 }}>
-            <span style={{ fontFamily: "'Space Mono',monospace", fontSize: 11, letterSpacing: 3, color: "#E8612A" }}>NO SIGNAL</span>
+
+            {/* Buttons */}
+            <div style={{ display: "flex", gap: 8 }}>
+              {!connected ? (
+                <button onClick={connect} style={{ flex: 1, padding: "8px 10px", borderRadius: 6, border: `1px solid ${C.green}88`, background: "transparent", color: C.green, fontFamily: "'Space Mono',monospace", fontSize: 9, cursor: "pointer", letterSpacing: .8 }}>
+                  ▶ Connect
+                </button>
+              ) : (
+                <button onClick={disconnect} style={{ flex: 1, padding: "8px 10px", borderRadius: 6, border: `1px solid ${C.red}88`, background: "transparent", color: C.red, fontFamily: "'Space Mono',monospace", fontSize: 9, cursor: "pointer", letterSpacing: .8 }}>
+                  ■ Disconnect
+                </button>
+              )}
+              <button onClick={doReset} style={{ flex: 1, padding: "8px 10px", borderRadius: 6, border: `1px solid ${C.border}`, background: "transparent", color: C.muted, fontFamily: "'Space Mono',monospace", fontSize: 9, cursor: "pointer", letterSpacing: .8 }}>
+                ↺ Reset
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* Progress bar */}
-        <div style={{ width: "100%", maxWidth: 340, marginBottom: 20 }}>
-          <div style={{ display: "flex", justifyContent: "space-between", fontFamily: "'Space Mono',monospace", fontSize: 10, color: "#7A8FAD", letterSpacing: 1, marginBottom: 7 }}>
-            <span>ESTABLISHING LINK</span>
-            <span>{pct}%</span>
+        {/* ── Error banner ── */}
+        {error && (
+          <div style={{ marginBottom: 20, padding: "12px 16px", background: C.red + "12", border: `1px solid ${C.red}44`, borderRadius: 8, fontFamily: "'Space Mono',monospace", fontSize: 11, color: C.red }}>
+            ⚠ {error}
           </div>
-          <div style={{ height: 3, background: "#141D30", borderRadius: 2, overflow: "hidden" }}>
-            <div className="progress-fill-anim" style={{ height: "100%", background: "linear-gradient(90deg, #E8612A, #FFB800)", borderRadius: 2 }} />
+        )}
+
+        {/* ── Not connected placeholder ── */}
+        {!connected && !error && (
+          <div style={{ textAlign: "center", padding: "60px 20px", background: C.bgCard, border: `1px solid ${C.border}`, borderRadius: 12, marginBottom: 24 }}>
+            <div style={{ fontSize: 40, marginBottom: 16 }}>🛰️</div>
+            <div style={{ fontFamily: "'Syne',sans-serif", fontSize: 20, fontWeight: 700, color: C.white, marginBottom: 8 }}>Awaiting Connection</div>
+            <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 14, color: C.muted, marginBottom: 24 }}>
+              Make sure <span style={{ color: C.white, fontFamily: "'Space Mono',monospace" }}>server.py</span> is running on port 4443, then click Connect.
+            </p>
+            <button onClick={connect} style={{ padding: "11px 28px", background: C.accent, border: "none", borderRadius: 6, color: "#fff", fontFamily: "'Space Mono',monospace", fontSize: 11, letterSpacing: 1, cursor: "pointer", boxShadow: `0 4px 20px ${C.accent}44` }}>
+              ▶ Connect to Server
+            </button>
           </div>
-        </div>
+        )}
 
-        {/* Packet log */}
-        <div style={{ width: "100%", background: "#070C18", border: "1px solid #141D30", borderRadius: 8, padding: "12px 16px", fontFamily: "'Space Mono',monospace", fontSize: 11, textAlign: "left", marginBottom: 28 }}>
-          <div style={{ color: "#27C47A", opacity: 0.25, marginBottom: 3 }}>[INIT]  LoRa SX1278 @ 433MHz — searching...</div>
-          <div style={{ color: "#27C47A", opacity: 0.25, marginBottom: 3 }}>[RX]    Awaiting ground station connection...</div>
-          <div key={logIdx} className="log-fade" style={{ color: "#27C47A" }}>{logs[logIdx]}</div>
-        </div>
+        {/* ── Live data UI (only shown when connected) ── */}
+        {connected && (
+          <>
+            {/* Top summary cards */}
+            <div className="tele-top-row" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 12, marginBottom: 20 }}>
+              {topCards.map(s => (
+                <HoverCard key={s.label} glowColor={s.color + "55"} style={{ padding: "14px 15px" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 11 }}>
+                    <div style={{ width: 36, height: 36, borderRadius: 8, background: s.color + "18", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15, flexShrink: 0 }}>{s.icon}</div>
+                    <div>
+                      <div style={{ fontFamily: "'Space Mono',monospace", fontSize: 9, color: C.muted, letterSpacing: 1.4, marginBottom: 3, textTransform: "uppercase" }}>{s.label}</div>
+                      <div style={{ fontFamily: "'Syne',sans-serif", fontSize: "clamp(15px,1.8vw,21px)", fontWeight: 700, color: s.color }}>{s.val}<span style={{ fontSize: 10, color: C.muted, marginLeft: 3 }}>{s.unit}</span></div>
+                    </div>
+                  </div>
+                </HoverCard>
+              ))}
+            </div>
 
-        {/* Back button */}
-        <button
-          onClick={() => {}}
-          style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "11px 24px", background: "transparent", border: "1px solid #1A2540", borderRadius: 6, color: "#7A8FAD", fontFamily: "'Space Mono',monospace", fontSize: 11, letterSpacing: 1, cursor: "pointer", transition: "border-color .2s, color .2s" }}
-          onMouseEnter={e => { e.currentTarget.style.borderColor = "#E8612A"; e.currentTarget.style.color = "#E8612A"; }}
-          onMouseLeave={e => { e.currentTarget.style.borderColor = "#1A2540"; e.currentTarget.style.color = "#7A8FAD"; }}
-        >
-          ← Back to Overview
-        </button>
+            {/* GPS row */}
+            {gps.lat !== null && (
+              <div style={{ display: "flex", gap: 12, marginBottom: 20, flexWrap: "wrap" }}>
+                <div style={{ flex: 1, background: C.bgCard, border: `1px solid ${C.border}`, borderRadius: 8, padding: "12px 16px", display: "flex", alignItems: "center", gap: 10 }}>
+                  <span style={{ fontSize: 16 }}>📍</span>
+                  <div>
+                    <div style={{ fontFamily: "'Space Mono',monospace", fontSize: 9, color: C.muted, letterSpacing: 1.5, marginBottom: 3 }}>GPS LATITUDE</div>
+                    <div style={{ fontFamily: "'Syne',sans-serif", fontSize: 18, fontWeight: 700, color: C.cyan }}>{gps.lat}</div>
+                  </div>
+                </div>
+                <div style={{ flex: 1, background: C.bgCard, border: `1px solid ${C.border}`, borderRadius: 8, padding: "12px 16px", display: "flex", alignItems: "center", gap: 10 }}>
+                  <span style={{ fontSize: 16 }}>📍</span>
+                  <div>
+                    <div style={{ fontFamily: "'Space Mono',monospace", fontSize: 9, color: C.muted, letterSpacing: 1.5, marginBottom: 3 }}>GPS LONGITUDE</div>
+                    <div style={{ fontFamily: "'Syne',sans-serif", fontSize: 18, fontWeight: 700, color: C.cyan }}>{gps.lon}</div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Main Altitude chart */}
+            <HoverCard glowColor={C.green + "44"} style={{ padding: "22px 22px 14px", marginBottom: 18 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 10, marginBottom: 10 }}>
+                <div>
+                  <div style={{ fontFamily: "'Syne',sans-serif", fontSize: 16, fontWeight: 700, color: C.white }}>Altitude — Time Series</div>
+                  <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 12, color: C.muted }}>Primary mission parameter: ascent & descent arc</div>
+                </div>
+                <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                  <Badge color={C.green}>Current: {L.alt} m</Badge>
+                  <Badge color={pCol}>{phase}</Badge>
+                </div>
+              </div>
+              <LineChart data={alt} color={C.green} unit="m" label="Altitude" height={180} />
+            </HoverCard>
+
+            {/* Secondary charts 3-column */}
+            <div className="tele-secondary" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 14 }}>
+              {subCharts.map(ch => (
+                <HoverCard key={ch.label} glowColor={ch.color + "44"} style={{ padding: "16px 16px 10px" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 }}>
+                    <div>
+                      <div style={{ fontFamily: "'Space Mono',monospace", fontSize: 9, color: C.muted, letterSpacing: 1.4, textTransform: "uppercase", marginBottom: 3 }}>{ch.label}</div>
+                      <div style={{ fontFamily: "'Syne',sans-serif", fontSize: 20, fontWeight: 700, color: ch.color }}>{ch.val}<span style={{ fontSize: 11, color: C.muted, marginLeft: 3 }}>{ch.unit}</span></div>
+                    </div>
+                  </div>
+                  <LineChart data={ch.data} color={ch.color} unit={ch.unit} label={ch.label} height={140} />
+                </HoverCard>
+              ))}
+            </div>
+
+            {/* Raw packet readout */}
+            <div style={{ marginTop: 16, background: C.bgCardAlt, border: `1px solid ${C.border}`, borderRadius: 8, padding: "12px 16px", fontFamily: "'Space Mono',monospace", fontSize: 11, color: C.green, overflowX: "auto", whiteSpace: "nowrap" }}>
+              <span style={{ color: C.muted, marginRight: 10 }}>PACKET ›</span>
+              ALT:{L.alt}m · TMP:{L.temp}°C · PRE:{L.pressure}Pa · HUM:{L.humidity}% · AX:{L.accelX} · AY:{L.accelY} · LUX:{L.light} · V:{L.voltage}mV · GX:{L.gyroX} · I:{L.current}mA · T+{elapsed}s · {phase}
+            </div>
+          </>
+        )}
 
       </div>
     </section>
   );
 }
-
 // ─── SECTION: TIMELINE( WILL BE UPDATED AS THE PROJECT PROGRESSES,  SYLVESTER WILL KEEP US UPDATED) ───────────────────────────────────────────────────────
 function TimelineSection() {
   const phases = [

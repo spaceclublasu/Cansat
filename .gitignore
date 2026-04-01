@@ -1,23 +1,31 @@
+<<<<<<< HEAD
 
 node_modules/
 
 
 .next/
+=======
+node_modules/
+.next/
+*.swp
+*.log
+logs/
+*.log.*
+>>>>>>> 40e8628acd86cf76c850241a9887a9d6f3b6d65f
 out/
-
-
 .env
 .env.local
 .env.production.local
 .env.development.local
-
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-
 .DS_Store
+<<<<<<< HEAD
 
 echo ".next/" >> .gitignore
 echo "__pycache__/" >> .gitignore
 echo "*.pyc" >> .gitignore
+=======
+>>>>>>> 40e8628acd86cf76c850241a9887a9d6f3b6d65f
