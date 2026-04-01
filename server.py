@@ -3,6 +3,7 @@ import time
 import json
 import asyncio
 import websockets
+import datetime
 from random import randint as aligned
 
 """ i created 
@@ -16,17 +17,17 @@ interval = 1/50
 telemetry = {"altitude": 0}
 
 """ i created a sensor_simulation function to try and simulate data delivery from the cansat to the g  station"""
-def sensor_simulator():
+async def sensor_simulator():
     telemetry["pressure"] = aligned(0, 100000)
     telemetry["humidity"] = aligned(0,1000)  
     telemetry["temperature"] = aligned(0, 20000)
-    telemetry["altitude"] +=1
+    telemetry["altitude"] +=0.105
     telemetry["voltage"] = aligned(0, 5000)
     telemetry["acceleration"] = [aligned(0, 1000), aligned(0, 1000), aligned(0, 1000)]
     telemetry["GPS Lattitude"] = aligned(0, 999999)
     telemetry["GPS Longitude"] = aligned(0, 999999)
     telemetry["Gyro"] = [aligned(0, 1000), aligned(0, 1000), aligned(0, 1000)]
-    telemetry["timestamp"] =aligned(10000000, 99999999)
+    telemetry["timestamp"] = time.time()
     telemetry["Luminous Intensity"] =aligned(0, 999)
     telemetry["current"] =aligned(0, 9999)
     return telemetry
@@ -34,12 +35,19 @@ def sensor_simulator():
 """ i created an asynchronous data streaming function to broadcast data telemetry data from from the server"""
 
 async def stream_data(websocket):
-    while telemetry["altitude"] < 999.6:
-        data = sensor_simulator()
-        try:
-            await websocket.send(json.dumps(data))
-        except websockets.exceptions.ConnectionClosedOk:
-           break
+    interval = 0.021
+    now = time.perf_counter()
+    while telemetry["altitude"] <999.6:
+        next_time  = time.perf_counter()
+        if next_time >= now:
+            data = await sensor_simulator()
+            try:
+                await websocket.send(json.dumps(data))
+            except websockets.exceptions.ConnectionClosedOK:
+                continue
+            finally:
+                now += interval 
+            await asyncio.sleep(0)
       ##finally:continue
 
 """i created the asynchronous main function to start the asynchronous web server and end it """
