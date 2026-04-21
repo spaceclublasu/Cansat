@@ -13,15 +13,12 @@ from random import randint as aligned
 4. a variable called interval which represensts the time interval between integer which represents the sccess
 """
 PORT = 4443
-interval = 1/50
-telemetry = {"altitude": 0}
-async def receive_data()
-""" i created a sensor_simulation function to try and simulate data delivery from the cansat to the g  station"""
-async def sensor_simulator():
+telemetry= {"altitude": 0}
+async def sensor_simulator(Height_per_cycle):
     telemetry["pressure"] = aligned(0, 100000)
     telemetry["humidity"] = aligned(0,255)  
     telemetry["temperature"] = aligned(0, 20000)
-    telemetry["altitude"] +=105
+    telemetry["altitude"] += Height_per_cycle
     telemetry["voltage"] = aligned(0, 5000)
     telemetry["acceleration"] = [aligned(0, 1000), aligned(0, 1000), aligned(0, 1000)]
     telemetry["GPS Lattitude"] = aligned(0, 999999)
@@ -36,10 +33,13 @@ async def sensor_simulator():
 """ i created an asynchronous data streaming function to broadcast data telemetry data from from the server"""
 
 async def stream_data(websocket):
-    interval = 0.021
+    frequency, max_altitude, speed = json.loads(await websocket.recv())
+    interval = float(1/frequency)
+    Height_per_cycle = int(float(speed/frequency) * 1000)
+    print(interval, max_altitude)
     now = time.perf_counter() 
-    while telemetry["altitude"]/1000 <999.6:
-        await sensor_simulator()
+    while telemetry["altitude"]/1000 < max_altitude:
+        await sensor_simulator(Height_per_cycle)
         next_time  = time.perf_counter()
         print("next time = ", next_time)
         if next_time >= now: 
@@ -50,7 +50,7 @@ async def stream_data(websocket):
                 await websocket.send(bin_data)
                # now += interval
                 print(23)
-                await asyncio.sleep(0.021)
+                await asyncio.sleep(interval)
             except websockets.exceptions.ConnectionClosedOK:
                 continue
             finally:
@@ -65,7 +65,7 @@ async def main():
         print("asynchronous server running on port", PORT)
         await server.serve_forever()
 try:
-   asyncio.run(main()) 
+    asyncio.run(main())
 except KeyboardInterrupt or websockets.exceptions.ConnectionClosedOk:
     print("Client disconnected")
 
