@@ -1,4 +1,5 @@
 "this is a cansat telemetry simulation program designed to simulate how a cansat sends data, to the g  station for visualization and storage. It is used to unders\tand how to visualize and store data properly"
+CLIENT_QUEUES = set()
 import time, math
 import json
 import asyncio
@@ -14,7 +15,12 @@ from random import randint as aligned
 """
 PORT = 4443
 telemetry= {"altitude": 0}
-async def sensor_simulator(Height_per_cycle):
+interval = float(input(" specify data transmission interval e.g 1.02 means 1.02Hz "))
+max_altitude = int(input("specify maximum altitude e.g 1000 means 1km"))
+speed  = float(input("specify ascent speed"))
+Height_per_cycle = int(float(speed/frequency) * 1000)
+
+def sensor_simulator(Height_per_cycle):
     telemetry["pressure"] = aligned(0, 100000)
     telemetry["humidity"] = aligned(0,255)  
     telemetry["temperature"] = aligned(0, 20000)
@@ -29,13 +35,14 @@ async def sensor_simulator(Height_per_cycle):
     telemetry["Lux"] =aligned(0, 999)
     telemetry["current"] =aligned(0, 9999)
     return telemetry
-        
-""" i created an asynchronous data streaming function to broadcast data telemetry data from from the server"""
 
+
+""" i created an asynchronous data streaming function to broadcast data telemetry data from from the server"""
+Tele_list =[sensor_simulator(Height_per_cycle) for x in range(0, max_altitude)]
 async def stream_data(websocket):
-    frequency, max_altitude, speed = json.loads(await websocket.recv())
     interval = float(1/frequency)
-    Height_per_cycle = int(float(speed/frequency) * 1000)
+    """queue  = asyncio.Queue()
+    relay_task = asyncio.create_task(relay(queue, websocket))""" 
     print(interval, max_altitude)
     now = time.perf_counter() 
     while telemetry["altitude"]/1000 < max_altitude:
