@@ -15,12 +15,14 @@ from random import randint as aligned
 """
 PORT = 4443
 telemetry= {"altitude": 0}
-interval = float(input(" specify data transmission interval e.g 1.02 means 1.02Hz "))
+frequency = float(input(" specify data transmission interval e.g 1.02 means 1.02Hz "))
+interval = float(1/frequency)
 max_altitude = int(input("specify maximum altitude e.g 1000 means 1km"))
-speed  = float(input("specify ascent speed"))
+speed  = float(input("specify ascent speed e.g 5 means 5m/s"))
 Height_per_cycle = int(float(speed/frequency) * 1000)
 
 def sensor_simulator(Height_per_cycle):
+    time.sleep(interval)
     telemetry["pressure"] = aligned(0, 100000)
     telemetry["humidity"] = aligned(0,255)  
     telemetry["temperature"] = aligned(0, 20000)
@@ -30,40 +32,40 @@ def sensor_simulator(Height_per_cycle):
     telemetry["GPS Lattitude"] = aligned(0, 999999)
     telemetry["GPS Longitude"] = aligned(0, 999999)
     telemetry["Gyro"] = [aligned(0, 1000), aligned(0, 1000), aligned(0, 1000)]
-    telemetry["timestamp"] =math.ceil(time.perf_counter())
-    print(telemetry["timestamp"])
+    telemetry["timestamp"]) =int( time.time_ns())
     telemetry["Lux"] =aligned(0, 999)
     telemetry["current"] =aligned(0, 9999)
+    telemetry["timestamp"] = math.ceil(time.timens()) 
     return telemetry
 
 
 """ i created an asynchronous data streaming function to broadcast data telemetry data from from the server"""
-Tele_list =[sensor_simulator(Height_per_cycle) for x in range(0, max_altitude)]
+Tele_list =[await sensor_simulator(Height_per_cycle) for x in range(0, max_altitude)]
 async def stream_data(websocket):
-    interval = float(1/frequency)
-    """queue  = asyncio.Queue()
-    relay_task = asyncio.create_task(relay(queue, websocket))""" 
+    """interval = float(1/frequency)
+    queue  = asyncio.Queue()
+    relay_task = asyncio.create_task(relay(queue, websocket)) 
     print(interval, max_altitude)
-    now = time.perf_counter() 
+    now = time.perf_counter()
     while telemetry["altitude"]/1000 < max_altitude:
         await sensor_simulator(Height_per_cycle)
         next_time  = time.perf_counter()
         print("next time = ", next_time)
-        if next_time >= now: 
-            telemetry["timestamp"] = math.ceil(time.perf_counter())
-            bin_data = pack("< i i i i h i B H h h h h h h H H ", telemetry["timestamp"],telemetry["GPS Lattitude"],telemetry["GPS Longitude"], telemetry["altitude"], telemetry["temperature"],telemetry["pressure"], telemetry["humidity"],telemetry["Lux"], telemetry["acceleration"][0], telemetry["acceleration"][1],telemetry["acceleration"][2], telemetry["Gyro"][0],telemetry["Gyro"][1], telemetry["Gyro"][2], telemetry["voltage"],telemetry["current"]) 
-            try:
-                print(87)
-                await websocket.send(bin_data)
-               # now += interval
-                print(23)
-                await asyncio.sleep(interval)
-            except websockets.exceptions.ConnectionClosedOK:
-                continue
-            finally:
-                now += interval
-                print(4566)
-      ##finally:continue
+        if next_time >= now:""" 
+    async for telemetry in Tele_list:      
+        bin_data = pack("< i i i i h i B H h h h h h h H H ", telemetry["timestamp"],telemetry["GPS Lattitude"],telemetry["GPS Longitude"], telemetry["altitude"], telemetry["temperature"],telemetry["pressure"], telemetry["humidity"],telemetry["Lux"], telemetry["acceleration"][0], telemetry["acceleration"][1],telemetry["acceleration"][2], telemetry["Gyro"][0],telemetry["Gyro"][1], telemetry["Gyro"][2], telemetry["voltage"],telemetry["current"]) 
+        try:
+            print(87)
+            await websocket.send(bin_data)
+            # now += interval
+            print(23)
+            await asyncio.sleep(interval)
+        except websockets.exceptions.ConnectionClosedOK:
+            continue
+        finally:
+            now += interval
+            print(4566)
+            ##finally:continue
 
 """i created the asynchronous main function to start the asynchronous web server and end it """
 async def main():
