@@ -40,7 +40,7 @@ def sensor_simulator(Height_per_cycle):
 
 
 """ i created an asynchronous data streaming function to broadcast data telemetry data from from the server"""
-Tele_list =[await sensor_simulator(Height_per_cycle) for x in range(0, max_altitude)]
+Tele_list =[sensor_simulator(Height_per_cycle) for x in range(0, max_altitude)]
 async def stream_data(websocket):
     """interval = float(1/frequency)
     queue  = asyncio.Queue()
