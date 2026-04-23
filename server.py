@@ -14,15 +14,20 @@ from random import randint as aligned
 4. a variable called interval which represensts the time interval between integer which represents the sccess
 """
 PORT = 4443
+count = 0
 telemetry= {"altitude": 0}
 frequency = float(input(" specify data transmission interval e.g 1.02 means 1.02Hz "))
 interval = float(1/frequency)
 max_altitude = int(input("specify maximum altitude e.g 1000 means 1km"))
 speed  = float(input("specify ascent speed e.g 5 means 5m/s"))
 Height_per_cycle = int(float(speed/frequency) * 1000)
-
+start = time.time()
 def sensor_simulator(Height_per_cycle):
-    time.sleep(interval)
+    time.sleep(interval) 
+    global count
+    count += 1
+    now = time.time()
+    print(interval,count)
     telemetry["pressure"] = aligned(0, 100000)
     telemetry["humidity"] = aligned(0,255)  
     telemetry["temperature"] = aligned(0, 20000)
@@ -32,14 +37,15 @@ def sensor_simulator(Height_per_cycle):
     telemetry["GPS Lattitude"] = aligned(0, 999999)
     telemetry["GPS Longitude"] = aligned(0, 999999)
     telemetry["Gyro"] = [aligned(0, 1000), aligned(0, 1000), aligned(0, 1000)]
-    telemetry["timestamp"] =int( time.time_ns())
+    telemetry["timestamp"] =int( (now - start)*10000)
     telemetry["Lux"] =aligned(0, 999)
     telemetry["current"] =aligned(0, 9999) 
     return telemetry
 
 
 """ i created an asynchronous data streaming function to broadcast data telemetry data from from the server"""
-Tele_list =[sensor_simulator(Height_per_cycle) for x in range(0, max_altitude)]
+Tele_list =[sensor_simulator(Height_per_cycle).copy() for x in range(0, max_altitude) if telemetry["altitude"]/1000 < max_altitude]
+print(Tele_list)
 async def stream_data(websocket):
     """interval = float(1/frequency)
     queue  = asyncio.Queue()
@@ -51,18 +57,18 @@ async def stream_data(websocket):
         next_time  = time.perf_counter()
         print("next time = ", next_time)
         if next_time >= now:""" 
-    async for telemetry in Tele_list:      
+    for telemetry in Tele_list:
         bin_data = pack("< i i i i h i B H h h h h h h H H ", telemetry["timestamp"],telemetry["GPS Lattitude"],telemetry["GPS Longitude"], telemetry["altitude"], telemetry["temperature"],telemetry["pressure"], telemetry["humidity"],telemetry["Lux"], telemetry["acceleration"][0], telemetry["acceleration"][1],telemetry["acceleration"][2], telemetry["Gyro"][0],telemetry["Gyro"][1], telemetry["Gyro"][2], telemetry["voltage"],telemetry["current"]) 
         try:
             print(87)
             await websocket.send(bin_data)
-            # now += interval
+            #now += interval
             print(23)
             await asyncio.sleep(interval)
         except websockets.exceptions.ConnectionClosedOK:
             continue
         finally:
-            now += interval
+            #now += interval
             print(4566)
             ##finally:continue
 
