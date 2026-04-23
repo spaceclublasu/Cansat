@@ -34,8 +34,7 @@ def sensor_simulator(Height_per_cycle):
     telemetry["Gyro"] = [aligned(0, 1000), aligned(0, 1000), aligned(0, 1000)]
     telemetry["timestamp"] =int( time.time_ns())
     telemetry["Lux"] =aligned(0, 999)
-    telemetry["current"] =aligned(0, 9999)
-    telemetry["timestamp"] = math.ceil(time.timens()) 
+    telemetry["current"] =aligned(0, 9999) 
     return telemetry
 
 
