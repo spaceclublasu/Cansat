@@ -40,7 +40,7 @@ Acts as a ground station receiving and displaying telemetry data.
   * Gyroscope (3-axis)
   * Voltage & Current
   * Light intensity
-* Continuous data broadcast at ~50 Hz
+* Continuous data broadcast at a maximum frequency of 10Hz
 
 ---
 
