@@ -71,10 +71,10 @@ sensor_simulator()
 async def stream_data(websocket)
 ```
 
-3. Sends data as JSON:
+3. Sends struct data as binary packets:
 
 ```python
-await websocket.send(json.dumps(data))
+await websocket.send(bin_data)
 ```
 
 4. Runs on:
@@ -198,7 +198,6 @@ Output:
 
 * Integrate with:
   * Database (PostgreSQL / InfluxDB)
-  * Visualization dashboard (e.g. Grafana)
 * Replace simulated data with **real sensor input**
 
 # 🧪 Educational Value
