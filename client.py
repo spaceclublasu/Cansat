@@ -11,7 +11,8 @@ async def get_data():
             print(message)
 try:
     while True:
-       asyncio.run(get_data())
+        asyncio.sleep(0.02)
+        asyncio.run(get_data())
 except KeyboardInterrupt:
     print("\n connection closed\n")
 

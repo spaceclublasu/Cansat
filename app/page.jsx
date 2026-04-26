@@ -529,12 +529,13 @@ function TelemetrySection() {
 
       // Map server.py fields to charts
       if (data.altitude !== undefined) {
-        setAlt(prev => [...prev.slice(-(MAX_PTS - 1)), { t: "now", v: +data.altitude.toFixed(1) }]);
-        // Detect phase from altitude
-        if (data.altitude >= 990) setPhase("DESCENT");
-        else if (data.altitude <= 2 && data.altitude > 0) setPhase("LANDED");
-        else if (data.altitude > 2) setPhase("ASCENT");
-      }
+  const realAlt = +(data.altitude / 10).toFixed(1);
+  setAlt(prev => [...prev.slice(-(MAX_PTS - 1)), { t: "now", v: realAlt }]);
+  // Phase detection using real altitude
+  if (realAlt >= 990) setPhase("DESCENT");
+  else if (realAlt <= 2 && realAlt > 0) setPhase("LANDED");
+  else if (realAlt > 2) setPhase("ASCENT");
+}
       if (data.temperature !== undefined)
         setTemp(prev => [...prev.slice(-(MAX_PTS - 1)), { t: "now", v: +data.temperature.toFixed(1) }]);
       if (data.pressure !== undefined)
