@@ -48,11 +48,12 @@ def sensor_simulator(height_per_cycle):
 tele_list =[sensor_simulator(height_per_cycle).copy() for x in range(0, max_altitude) if telemetry["altitude"]/1000 < max_altitude]
 print(tele_list)
 bin_data_list =[ pack("< i i i i h i B h h h h h h h h h ", telemetry["timestamp"],telemetry["gps lattitude"],telemetry["gps longitude"], telemetry["altitude"], telemetry["temperature"],telemetry["pressure"], telemetry["humidity"],telemetry["lux"], telemetry["acceleration"][0], telemetry["acceleration"][1],telemetry["acceleration"][2], telemetry["gyro"][0],telemetry["gyro"][1], telemetry["gyro"][2], telemetry["voltage"],telemetry["current"]) for telemetry in tele_list]
- 
+bin_data_list = bin_data_list[::-1].copy()
 print(tele_list)
 async def relay(queue, websocket):
     while True:
-
+        message = queue.get()
+        websocket.send(message)
 async def stream_data(websocket):
     """interval = float(1/frequency)
     queue  = asyncio.queue()
@@ -72,6 +73,11 @@ async def stream_data(websocket):
     finally:
         CLIENTS.remove(queue)
         relay_task.cancel()
+        try:
+            await relay_task
+        except asyncio.CancelledError:
+            pass
+
 
     for bin_data in bin_data_list:
         try:
