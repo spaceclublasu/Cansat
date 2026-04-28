@@ -29,14 +29,14 @@ def sensor_simulator(height_per_cycle):
     count += 1
     now = time.time()
     print(interval,count)
-    telemetry["pressure"] = aligned(0, 100000)
+    telemetry["pressure"] = aligned(0, )
     telemetry["humidity"] = aligned(0,255)  
-    telemetry["temperature"] = aligned(0, 20000)
-    telemetry["altitude"] += height_per_cycle
+    telemetry["temperature"] = aligned(-255, 255)
+    telemetry["altitude"] += height_per_cycle #max height is 1km aka 1000
     telemetry["voltage"] = aligned(0, 5000)
     telemetry["acceleration"] = [aligned(0, 1000), aligned(0, 1000), aligned(0, 1000)]
-    telemetry["gps lattitude"] = aligned(0, 999999)
-    telemetry["gps longitude"] = aligned(0, 999999)
+    telemetry["gps lattitude"] = aligned(-30000, 30000)
+    telemetry["gps longitude"] = aligned(-30000, 30000)
     telemetry["gyro"] = [aligned(0, 1000), aligned(0, 1000), aligned(0, 1000)]
     telemetry["timestamp"] =int( (now - start)*10000)
     telemetry["lux"] =aligned(0, 999)
@@ -47,13 +47,17 @@ def sensor_simulator(height_per_cycle):
 """ i created an asynchronous data streaming function to broadcast data telemetry data from from the server"""
 tele_list =[sensor_simulator(height_per_cycle).copy() for x in range(0, max_altitude) if telemetry["altitude"]/1000 < max_altitude]
 print(tele_list)
-bin_data_list =[ pack("< i i i i h i B h h h h h h h h h ", telemetry["timestamp"],telemetry["gps lattitude"],telemetry["gps longitude"], telemetry["altitude"], telemetry["temperature"],telemetry["pressure"], telemetry["humidity"],telemetry["lux"], telemetry["acceleration"][0], telemetry["acceleration"][1],telemetry["acceleration"][2], telemetry["gyro"][0],telemetry["gyro"][1], telemetry["gyro"][2], telemetry["voltage"],telemetry["current"]) for telemetry in tele_list]
+bin_data_list =[ pack("< I i i i h H B h h h h h h h h h ", telemetry["timestamp"],telemetry["gps lattitude"],telemetry["gps longitude"], telemetry["altitude"], telemetry["temperature"],telemetry["pressure"], telemetry["humidity"],telemetry["lux"], telemetry["acceleration"][0], telemetry["acceleration"][1],telemetry["acceleration"][2], telemetry["gyro"][0],telemetry["gyro"][1], telemetry["gyro"][2], telemetry["voltage"],telemetry["current"]) for telemetry in tele_list]
 bin_data_list = bin_data_list[::-1].copy()
 print(tele_list)
 async def relay(queue, websocket):
-    while True:
-        message = queue.get()
-        websocket.send(message)
+    try:
+        while True:
+            message = await queue.get()
+            await websocket.send(message)
+    except asyncio.CancelledError:
+        pass
+
 async def stream_data(websocket):
     """interval = float(1/frequency)
     queue  = asyncio.queue()
@@ -65,8 +69,8 @@ async def stream_data(websocket):
         next_time  = time.perf_counter()
         print("next time = ", next_time)
         if next_time >= now:""" 
-    queue = asyncio.Queue
-    relay_task = asyncio.create_task(relay(queue, wbsocket))
+    queue = asyncio.Queue()
+    relay_task = asyncio.create_task(relay(queue, websocket))
     CLIENTS.add(queue)
     try:
         await websocket.connection_closed()
@@ -78,8 +82,16 @@ async def stream_data(websocket):
         except asyncio.CancelledError:
             pass
 
+async def broadcast_packet(packet: bytes):
+    """send one telemetry packet to all clients"""
+    for queue in CLIENTS:
+        await queue.put(packet)
 
-    for bin_data in bin_data_list:
+async def telemetry_stream(bin_data_list):
+    for packet in bin_data_list:
+        await broadcast_packet(packet)
+        await asyncio.sleep(interval)
+"""    for bin_data in bin_data_list:
         try:
             print(87)
             await websocket.send(bin_data)
@@ -92,12 +104,13 @@ async def stream_data(websocket):
             #now += interval
             print(4566)
             ##finally:continue
-
+"""
 """i created the asynchronous main function to start the asynchronous web server and end it """
 async def main():
     await asyncio.sleep(10)
     async with websockets.serve(stream_data, "0.0.0.0", 4443) as server:
         print("asynchronous server running on port", PORT)
+        await telemetry_stream(bin_data_list)
         await server.serve_forever()
 try:
     asyncio.run(main())
