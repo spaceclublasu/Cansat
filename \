@@ -18,7 +18,7 @@ PORT  = 4443
 count = 0
 print("for good results, provide high  frequency values but low ascent/descent speed values")
 telemetry= {"altitude": 0}
-frequency = float(input(" specify data transmission frequency e.g 1.02 means 1.02hz "))
+frequency = float(input(" specify data transmission interval e.g 1.02 means 1.02hz "))
 interval = float(1/frequency)
 max_altitude = int(input("specify maximum altitude e.g 1000 means 1km"))
 speed  = float(input("specify ascent speed e.g 5 means 5m/s"))
