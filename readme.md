@@ -1,7 +1,3 @@
-Here’s a clean, professional **README.md** for your server program, based directly on your `server.py` and `client.py`. I’ve structured it the way real engineering projects (including aerospace/embedded systems) document telemetry systems.
-
----
-
 # 🚀 CanSat Telemetry Simulation Server
 
 A lightweight **asynchronous telemetry simulation system** that mimics how a CanSat transmits environmental and motion data to a ground station using WebSockets.
