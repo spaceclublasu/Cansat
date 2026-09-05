@@ -6,7 +6,6 @@ function TelemetrySection() {
   const [isLive, setIsLive] = useState(true);
   const [phase, setPhase] = useState("ASCENT");
   const [elapsed, setElapsed] = useState(0);
-
   const [alt, setAlt] = useState(() => makeSeries(80, 25));
   const [temp, setTemp] = useState(() => makeSeries(29, 3));
   const [pressure, setPressure] = useState(() => makeSeries(1013, 5));
@@ -17,6 +16,7 @@ function TelemetrySection() {
   const [rssi, setRssi] = useState(() => makeSeries(-71, 4));
 
   const doReset = () => {
+  
     setAlt(makeSeries(80, 25)); setTemp(makeSeries(29, 3));
     setPressure(makeSeries(1013, 5)); setHumidity(makeSeries(61, 7));
     setAccelX(makeSeries(.1, 1.1)); setAccelY(makeSeries(.05, .8));
