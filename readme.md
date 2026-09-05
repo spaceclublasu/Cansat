@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🚀 CanSat Groundstation telemetry software 
 # overview
 This repository contains the avionics telecommunications software used for the entire cansat project.
@@ -5,6 +6,38 @@ This software makes use of a distributed systems design architecture in order to
 The software consists of two parts:
 1. ### A Cansat simulation server program###:
    This is a lightweight **asynchronous telemetry simulation program** that mimics how a CanSat groundstation computer transmits environmental and motion data to two independent client computers for processing ,storage and visualization using WebSockets and asyncio in real time. This program is only used for pre-hardware integration software development and testing. It will be replaced by a program, which will be added later, that is native to the Raspberry pico-W computer during hardware integration.
+=======
+# 🚀 CanSat Telemetry Simulation Server
+
+A lightweight **asynchronous telemetry simulation system** that mimics how a CanSat transmits environmental and motion data to a ground station using WebSockets.
+
+This project is designed to help understand:
+
+* Real-time data streaming
+* Telemetry system design
+* Client-server communication
+* Data visualization pipelines
+
+---
+
+# 📡 Overview
+
+The system consists of two components:
+
+### 🛰️ Server (`server.py`)
+
+Simulates a CanSat transmitting telemetry data at high frequency.
+
+### 🖥️ Client (`client.py`)
+
+Acts as a ground station receiving and displaying telemetry data.
+
+---
+
+# ⚙️ Features
+
+* Real-time telemetry streaming using **WebSockets**
+* Asynchronous architecture using `asyncio`
 * Simulated sensor data:
   * Altitude
   * Temperature
